@@ -11,6 +11,7 @@ import ThingDetailPage from './components/ThingDetailPage';
 import ThingMakeListingPage from './components/ThingMakeListingPage';
 import Make from './components/Make';
 import ThingCreatePage from './components/ThingCreatePage';
+import ProfilePage from './components/ProfilePage';
 
 import {Route, Link, Switch} from 'react-router-dom';
 
@@ -30,6 +31,7 @@ export default class App extends React.Component {
         <PropsRoute exact path="/things/makes" component={ThingMakeListingPage} app={this}/>
         <PropsRoute exact path="/makes/detail" component={Make} app={this}/>
         <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
+        <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
       </Switch>
     </div>;
   }

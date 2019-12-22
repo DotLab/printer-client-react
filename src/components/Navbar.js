@@ -26,7 +26,7 @@ export default class Navbar extends React.Component {
     } else if (e.target.value === ROUTE_NEW_CUSTOMIZABLE) {
       this.props.history.push('/things/customizable/new');
     } else if (e.target.value === ROUTE_PROFILE) {
-      this.props.history.push('/me');
+      this.props.history.push('/username');
     } else if (e.target.value === ROUTE_BOOKMARK) {
       this.props.history.push('/me/bookmark');
     } else if (e.target.value === ROUTE_MAKE) {

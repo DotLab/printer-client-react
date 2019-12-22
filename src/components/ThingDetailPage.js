@@ -14,12 +14,8 @@ export default class ThingDetailPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-      tab: COMMENTS,
+      tab: DETAIL,
     };
-  }
-
-  changeTab(tab) {
-    this.setState({tab});
   }
 
   render() {
@@ -44,19 +40,19 @@ export default class ThingDetailPage extends React.Component {
           </div>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
-          <span onClick={() => this.changeTab(DETAIL)} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-info"></i> details
           </span>
-          <span onClick={() => this.changeTab(COMMENTS)} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === COMMENTS ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <span onClick={() => this.setState({tab: COMMENTS})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === COMMENTS ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-comments"></i> comments
           </span>
-          <span onClick={() => this.changeTab(MAKES)} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === MAKES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <span onClick={() => this.setState({tab: MAKES})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === MAKES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-wrench"></i> makes
           </span>
-          <span onClick={() => this.changeTab(REMIXES)} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === REMIXES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <span onClick={() => this.setState({tab: REMIXES})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === REMIXES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-compact-disc"></i> remixes
           </span>
-          <span onClick={() => this.changeTab(LICENSE)} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === LICENSE ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <span onClick={() => this.setState({tab: LICENSE})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === LICENSE ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-balance-scale"></i> View license
           </span>
         </div>
