@@ -22,7 +22,6 @@ export default class Make extends React.Component {
           </div>
         </div>
 
-
         <div class="Py(30px) D(f) Jc(sa) My(10px)">
           <div><img class="Maw(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/></div>
           <div class="W(50%) Mx(20px)">

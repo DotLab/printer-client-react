@@ -38,6 +38,7 @@ export default class Navbar extends React.Component {
     } else if (e.target.value === ROUTE_LOGOUT) {
       this.logout();
     }
+    e.target.value = '';
   }
 
   render() {
