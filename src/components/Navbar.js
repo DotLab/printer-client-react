@@ -34,7 +34,7 @@ export default class Navbar extends React.Component {
     } else if (e.target.value === ROUTE_THING) {
       this.props.history.push('/me/thing');
     } else if (e.target.value === ROUTE_SETTINGS) {
-      this.props.history.push('/me/settings');
+      this.props.history.push('/settings');
     } else if (e.target.value === ROUTE_LOGOUT) {
       this.logout();
     }

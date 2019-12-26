@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {onChange} from '../utils';
 
 const INPUT_STYLE = 'H(44px) Bdrs($bdrs-control) D(b) W(100%) Fz(14px) P(12px) Bdw(t) Bgc(#fafbfc)';
 
@@ -7,6 +8,22 @@ export default class Register extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
+
+    this.state= {
+      userName: '',
+      displayName: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    };
+
+    this.onChange = onChange.bind(this);
+    this.register = this.register.bind(this);
+    this.checkPasswordMatch = this.checkPasswordMatch.bind(this);
+  }
+
+  checkPasswordMatch() {
+    return (this.state.password === this.state.passwordConfirm);
   }
 
   render() {
@@ -18,7 +35,7 @@ export default class Register extends React.Component {
           <form class="Maw(300px) Mx(a) Px(12px) Bdrs($bdrs-panel) My(30px)">
             <div>
               <span class="Fz(14px) Fw(b)">Username</span>
-              <input class={INPUT_STYLE} type="userName" name="email" onChange={this.onChange} required/>
+              <input class={INPUT_STYLE} type="userName" name="username" onChange={this.onChange} required/>
             </div>
             <div class="Mt($m-control)">
               <span class="Fz(14px) Fw(b)">Email address</span>
