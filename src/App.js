@@ -8,10 +8,12 @@ import RegisterPage from './components/RegisterPage';
 import PasswordResetPage from './components/PasswordResetPage';
 import ThingDetailPage from './components/ThingDetailPage';
 import ThingMakeListingPage from './components/ThingMakeListingPage';
+import MakeCreatePage from './components/MakeCreatePage';
 import Make from './components/Make';
 import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
+
 
 import {Switch} from 'react-router-dom';
 
@@ -89,6 +91,7 @@ export default class App extends React.Component {
         <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
         <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
+        <PropsRoute exact path="/things/new/make" component={MakeCreatePage} app={this}/>
       </Switch>
     </div>;
   }
