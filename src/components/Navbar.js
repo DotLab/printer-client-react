@@ -10,7 +10,6 @@ export default class Navbar extends React.Component {
     this.app = props.app;
     this.state = {
       exploreHovering: false,
-      isLoggedin: true,
     };
 
     this.changePath = this.changePath.bind(this);
@@ -36,13 +35,14 @@ export default class Navbar extends React.Component {
     } else if (e.target.value === ROUTE_SETTINGS) {
       this.props.history.push('/settings');
     } else if (e.target.value === ROUTE_LOGOUT) {
-      this.logout();
+      this.app.userLogOut();
     }
     e.target.value = '';
   }
 
   render() {
-    const {exploreHovering, isLoggedin} = this.state;
+    const {exploreHovering} = this.state;
+    const isLoggedin = this.app.state.token;
     return <div>
       <div class="Bgc(black) H(60px) Pos(st) Mb(20px) D(f) Jc(sa)" >
         <div>

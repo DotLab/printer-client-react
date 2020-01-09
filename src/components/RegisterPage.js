@@ -1,6 +1,5 @@
 
 import React from 'react';
-import {onChange} from '../utils';
 
 const INPUT_STYLE = 'H(44px) Bdrs($bdrs-control) D(b) W(100%) Fz(14px) P(12px) Bdw(t) Bgc(#fafbfc)';
 
@@ -17,8 +16,6 @@ export default class Register extends React.Component {
       passwordConfirm: '',
     };
 
-    this.onChange = onChange.bind(this);
-    this.register = this.register.bind(this);
     this.checkPasswordMatch = this.checkPasswordMatch.bind(this);
   }
 
@@ -49,7 +46,7 @@ export default class Register extends React.Component {
               <span class="Fz(14px) Fw(b)">Password confirmation</span>
               <input class={INPUT_STYLE} type="password" name="password" onChange={this.onChange} required/>
             </div>
-            <button class="C(white) D(b) W(100%) Bgc(dimgray) Bgc(black):h Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t)" onClick={this.login}>Register</button>
+            <button class="C(white) D(b) W(100%) Bgc(dimgray) Bgc(black):h Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t)" disabled={!this.checkPasswordMatch()} onClick={this.login}>Register</button>
           </form>
 
         </div>

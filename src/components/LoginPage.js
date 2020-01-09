@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {onChange} from '../utils';
 
 const INPUT_STYLE = 'H(44px) Bdrs($bdrs-control) D(b) W(100%) Fz(14px) P(12px)  Bdw(t)';
 
@@ -8,6 +9,23 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+
+    this.onChange = onChange.bind(this);
+    this.login = this.login.bind(this);
+  }
+
+  async login(e) {
+    e.preventDefault();
+    try {
+      await this.app.userLogin(this.state);
+    } catch (err) {
+      this.setState({email: '', password: ''});
+    }
   }
 
   render() {

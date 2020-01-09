@@ -57,7 +57,6 @@ export default class App extends React.Component {
 
     localStorage.setItem('token', token);
     this.setState({token});
-    this.userDetail({token});
     this.history.push('/');
   }
 
@@ -75,6 +74,14 @@ export default class App extends React.Component {
   async userChangePassword({currentPassword, newPassword, token}) {
     await this.genericApi1('/v1/users/settings/password/change', {token, currentPassword, newPassword});
     this.history.push('/login');
+  }
+
+  async createThing({fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
+    raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
+    const id = await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
+      license, category, type, summary, printerBrand, raft, support, resolution, infill,
+      filamentBrand, filamentColor, filamentMaterial, note, token});
+    console.log(id);
   }
 
   render() {
