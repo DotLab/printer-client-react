@@ -48,6 +48,8 @@ export default class ThingDetailPage extends React.Component {
     };
 
     this.makeComment = this.makeComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
   }
 
   async componentDidMount() {
@@ -59,6 +61,20 @@ export default class ThingDetailPage extends React.Component {
 
   async makeComment(comment) {
     await this.app.comment({thingId: this.state._id, comment, token: this.app.state.token});
+    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    this.setState({comments});
+  }
+
+  async deleteComment(commentId) {
+    await this.app.deleteComment({commentId, token: this.app.state.token});
+    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    this.setState({comments});
+  }
+
+  async checkLogin() {
+    if (!this.app.state.token) {
+      this.props.history.push('/login');
+    }
   }
 
   render() {
@@ -108,7 +124,8 @@ export default class ThingDetailPage extends React.Component {
           summary={summary} printerBrand={printerBrand} raft={raft} support={support} resolution={resolution} infill={infill}
           filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
         />}
-        {tab === COMMENTS && <ThingDetailComment comments={comments} makeComment={this.makeComment} commentCount={commentCount}/>}
+        {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
+          deleteComment={this.deleteComment} commentCount={commentCount}/>}
         {tab === MAKES && <ThingDetailMake/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}

@@ -98,6 +98,10 @@ export default class App extends React.Component {
     await this.genericApi1('/v1/things/comment/create', {comment, thingId, token});
   }
 
+  async deleteComment({commentId, token}) {
+    await this.genericApi1('/v1/things/comment/delete', {commentId, token});
+  }
+
   async getCommentList({thingId, token, limit}) {
     console.log(thingId, token, limit);
     const res = await this.genericApi1('/v1/things/comment/list', {thingId, token, limit});
