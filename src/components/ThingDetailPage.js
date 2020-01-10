@@ -7,6 +7,7 @@ import ThingDetailRemix from './ThingDetailRemix';
 import ThingDetailLicense from './ThingDetailLicense';
 
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './utils';
+import {formatDate, formatNumberShort} from '../utils';
 
 export default class ThingDetailPage extends React.Component {
   constructor(props) {
@@ -15,11 +16,46 @@ export default class ThingDetailPage extends React.Component {
 
     this.state = {
       tab: DETAIL,
+      uploaderName: null,
+      fileName: null,
+      fileSize: null,
+
+      name: null,
+      license: null,
+      category: null,
+      type: null,
+      summary: null,
+      printerBrand: null,
+      raft: null,
+      support: null,
+      resolution: null,
+      infill: null,
+      filamentBrand: null,
+      filamentColor: null,
+      filamentMaterial: null,
+      note: null,
+
+      uploadDate: null,
+      likeCount: null,
+      bookmarkCount: null,
+      downloadCount: null,
+      commentCount: null,
+      makeCount: null,
+      remixCount: null,
     };
   }
 
+  async componentDidMount() {
+    const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
+    console.log(thing);
+    this.setState(thing);
+  }
+
   render() {
-    const {tab} = this.state;
+    console.log(this.state);
+    const {tab, uploaderName, fileName, fileSize, name, license, category, type, summary, printerBrand,
+      raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
+      note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount, remixCount} = this.state;
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -27,16 +63,16 @@ export default class ThingDetailPage extends React.Component {
           <div class="D(f)">
             <div class="Bdrs(100%) Mend(20px) D(b)"><i class="fas fa-print"></i></div>
             <div>
-              <div class="C(black) Td(u):h Cur(p)">some project</div>
-              <div class="Fz(14px) C($gray-500)">some author</div>
+              <div class="C(black) Td(u):h Cur(p)">{name}</div>
+              <div class="Fz(14px) C($gray-500)">{uploaderName}</div>
             </div>
           </div>
           <div>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-thumbs-up"></i> 12</span>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-bookmark"></i> 12</span>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-download"></i> 12</span>
-            <Link to="/things/new/make" class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE 12</Link>
-            <Link to="/things/new/remix"class="Td(n):h Fz(16px) C(black) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX 12</Link>
+            <span class="Mend(26px) Cur(p)"><i class="fas fa-thumbs-up"></i> {likeCount}</span>
+            <span class="Mend(26px) Cur(p)"><i class="fas fa-bookmark"></i> {bookmarkCount}</span>
+            <span class="Mend(26px) Cur(p)"><i class="fas fa-download"></i> {downloadCount}</span>
+            <Link to="/things/new/make" class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>
+            <Link to="/things/new/remix"class="Td(n):h Fz(16px) C(black) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>
           </div>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
@@ -57,7 +93,7 @@ export default class ThingDetailPage extends React.Component {
           </span>
         </div>
 
-        {tab === DETAIL && <ThingDetailInfo/>}
+        {tab === DETAIL && <ThingDetailInfo fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)} summary={summary}/>}
         {tab === COMMENTS && <ThingDetailComment/>}
         {tab === MAKES && <ThingDetailMake/>}
         {tab === REMIXES && <ThingDetailRemix/>}

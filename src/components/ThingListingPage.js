@@ -143,7 +143,8 @@ export default class ThingListingPage extends React.Component {
             </span>
           </div>
           <div class="W(100%) Mx(a) Pos(r)">
-            {things.map((thing) => <ThingOverview key={thing._id} name={thing.name}/>)}
+            {things.map((thing) => <ThingOverview key={thing._id} id={thing._id} name={thing.name}
+              uploaderName={thing.uploaderName} likeCount={thing.likeCount}/>)}
           </div>
         </div>
       </div>

@@ -89,18 +89,23 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async thingDetail({thingId}) {
+    const res = await this.genericApi1('/v1/things/detail', {thingId});
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
       <Switch>
+        <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
+        <PropsRoute exact path="/things/:thingId" component={ThingDetailPage} app={this}/>
         <PropsRoute exact path="/things" component={ThingListingPage} app={this}/>
         <PropsRoute exact path="/register" component={RegisterPage} app={this}/>
         <PropsRoute exact path="/login" component={LoginPage} app={this}/>
         <PropsRoute exact path="/password-reset" component={PasswordResetPage} app={this}/>
-        <PropsRoute exact path="/things/detail" component={ThingDetailPage} app={this}/>
         <PropsRoute exact path="/things/makes" component={ThingMakeListingPage} app={this}/>
         <PropsRoute exact path="/makes/detail" component={Make} app={this}/>
-        <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
         <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
         <PropsRoute exact path="/things/new/make" component={MakeCreatePage} app={this}/>

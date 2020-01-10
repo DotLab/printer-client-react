@@ -5,6 +5,7 @@ import {TYPE_ART, TYPE_PRINTER, TYPE_FASHION, TYPE_GADGETS, TYPE_HOBBY, TYPE_HOU
 import {CC_BY, CC_BY_SA, CC_BY_ND, CC_BY_NC, CC_BY_NC_SA, CC_BY_NC_ND, CC_PD, GNU_GPL, GNU_LGPL, BSD} from './utils';
 import {LICENSE_CC_BY, LICENSE_CC_BY_SA, LICENSE_CC_BY_ND, LICENSE_CC_BY_NC, LICENSE_CC_BY_NC_SA, LICENSE_CC_BY_NC_ND, LICENSE_CC_PD, LICENSE_GNU_GPL, LICENSE_GNU_LGPL, LICENSE_BSD} from './utils';
 import {onChange} from '../utils';
+const ReactMarkdown = require('react-markdown');
 
 const ALL = 'All';
 const INPUT_STYLE = 'W(84%) H(40px) Fz(14px) Bdc(t) O(n) Bdbs(s):h Bdbc(black):f Bdbc(lightgray) Mb(30px)';
@@ -21,6 +22,7 @@ export default class ThingCreatePage extends React.Component {
       subTypes: null,
       printingSettings: true,
       inputKey: null,
+      preview: false,
 
       buffer: null,
       fileName: null,
@@ -98,7 +100,7 @@ export default class ThingCreatePage extends React.Component {
   }
 
   render() {
-    const {subTypes, printingSettings, fileName} = this.state;
+    const {subTypes, printingSettings, fileName, preview} = this.state;
 
     return <div class="Py(30px) My(10px)">
       <div class="W(70%) Mx(a)">
@@ -163,8 +165,17 @@ export default class ThingCreatePage extends React.Component {
 
             <div class="Mt($m-control)">
               <span class="Fz(14px) Fw(b)">Summary *</span>
-              <textarea class="D(b) Bdrs(4px) W(100%) H(180px)" placeholder="Add a summary..." name="summary"
-                onChange={this.onChange} required/>
+              <div>
+                <span class={'Fz(14px) Cur(p) Mend(20px) ' + (preview ? '' : 'Fw(b)')} onClick={() => this.setState({preview: false})}>Edit</span>
+                <span class={'Fz(14px) Cur(p) ' + (preview ? 'Fw(b)' : '')} onClick={() => this.setState({preview: true})}>Preview changes</span>
+              </div>
+              {!preview && <textarea class="D(b) Bdrs(4px) W(100%) H(180px)" placeholder="Add a summary..." name="summary"
+                onChange={this.onChange} value={this.state.summary} required/>}
+              {preview &&
+              <div class="Bds(s) Bdw(t) Bdrs(4px) Bdc(lightgray) Px(10px) Py(10px)">
+                <ReactMarkdown source={this.state.summary}/>
+              </div>}
+
             </div>
 
             <div class="Mt($m-control)">

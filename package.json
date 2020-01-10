@@ -33,6 +33,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "query-string": "^6.9.0"
+    "query-string": "^6.9.0",
+    "react-markdown": "^4.3.1"
   }
 }
