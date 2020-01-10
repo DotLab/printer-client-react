@@ -104,6 +104,7 @@ export default class ThingCreatePage extends React.Component {
       <div class="W(70%) Mx(a)">
         <div class="Bds(s) Ta(c) H(300px)">
           <div class="Py(80px)">
+            <label>Upload zip file here</label>
             <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" onChange={this.onFileChange}/>
             </div>
           </div>
