@@ -14,8 +14,6 @@ export default class ThingListingPage extends React.Component {
 
     this.query = queryString.parse(props.location.search);
 
-    console.log(this.query);
-
     this.state = {
       types: null,
       categorySelected: ALL,

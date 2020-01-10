@@ -8,6 +8,7 @@ import ThingDetailLicense from './ThingDetailLicense';
 
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './utils';
 import {formatDate, formatNumberShort, getFullLicenseName} from '../utils';
+const LIMIT = 20;
 
 export default class ThingDetailPage extends React.Component {
   constructor(props) {
@@ -15,11 +16,12 @@ export default class ThingDetailPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-      tab: DETAIL,
+      tab: COMMENTS,
       uploaderName: null,
       fileName: null,
       fileSize: null,
 
+      _id: null,
       name: null,
       license: null,
       category: null,
@@ -42,20 +44,29 @@ export default class ThingDetailPage extends React.Component {
       commentCount: null,
       makeCount: null,
       remixCount: null,
+      comments: [],
     };
+
+    this.makeComment = this.makeComment.bind(this);
   }
 
   async componentDidMount() {
     const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
-    console.log(thing);
     this.setState(thing);
+    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    this.setState({comments});
+  }
+
+  async makeComment(comment) {
+    await this.app.comment({thingId: this.state._id, comment, token: this.app.state.token});
   }
 
   render() {
     const {tab, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
-      note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount, remixCount} = this.state;
-    console.log(getFullLicenseName(license));
+      note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
+      remixCount, comments} = this.state;
+    console.log(this.state);
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -97,7 +108,7 @@ export default class ThingDetailPage extends React.Component {
           summary={summary} printerBrand={printerBrand} raft={raft} support={support} resolution={resolution} infill={infill}
           filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
         />}
-        {tab === COMMENTS && <ThingDetailComment commentCount={commentCount}/>}
+        {tab === COMMENTS && <ThingDetailComment comments={comments} makeComment={this.makeComment} commentCount={commentCount}/>}
         {tab === MAKES && <ThingDetailMake/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}

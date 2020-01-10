@@ -64,8 +64,6 @@ export default class ThingCreatePage extends React.Component {
     const name = e.target.files[0].name;
     const size = e.target.files[0].size;
 
-    console.log(size);
-
     if (size > MAX_SIZE) {
       this.app.error('zip too large');
     }

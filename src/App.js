@@ -94,6 +94,17 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async comment({comment, thingId, token}) {
+    await this.genericApi1('/v1/things/comment/create', {comment, thingId, token});
+  }
+
+  async getCommentList({thingId, token, limit}) {
+    console.log(thingId, token, limit);
+    const res = await this.genericApi1('/v1/things/comment/list', {thingId, token, limit});
+    console.log(res);
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
