@@ -1,5 +1,5 @@
 import React from 'react';
-import ThingOverview from './ThingOverview';
+import MakeOverview from './MakeOverview';
 
 export default class ThingDetailMake extends React.Component {
   constructor(props) {
@@ -9,11 +9,9 @@ export default class ThingDetailMake extends React.Component {
 
   render() {
     return <div class="Py(30px) My(10px)">
-      <ThingOverview/>
-      <ThingOverview/>
-      <ThingOverview/>
-      <ThingOverview/>
-      <ThingOverview/>
+      <MakeOverview/>
+      <MakeOverview/>
+
     </div>;
   }
 }

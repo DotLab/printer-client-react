@@ -9,7 +9,7 @@ export default class ThingDetailComment extends React.Component {
 
   render() {
     return <div class="Py(30px) My(10px)">
-      <div>
+      <div class="My(20px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">
         <textarea class="D(b) Bdrs(4px) Bdc(t) W(100%) H(120px)" placeholder="Add a comment..." name="body"
           onFocus={this.editing} />
       </div>

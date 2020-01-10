@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default class ThingOverview extends React.Component {
+export default class MakeOverview extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
   }
 
   render() {
-    const {name, uploaderName, likeCount} = this.props;
+    const {name, uploaderName} = this.props;
 
     return <figure class="Pos(r) D(ib) Maw(320px) M(20px)">
       <div class="D(f)">
@@ -23,8 +23,7 @@ export default class ThingOverview extends React.Component {
         <img class="W(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/>
       </div>
       <Link to={{pathname: `/things/${this.props.id}/`}}>
-        <figcaption class="W(100%) Pos(a) D(f) Fxd(c) Jc(c) H(83%) B(0) Ai(c) P(8px) C(white) Op(0) Op(1):h Bgc(#000000.4):h">
-          <div><i class="fas fa-thumbs-up"></i> {likeCount}</div>
+        <figcaption class="W(100%) Pos(a) D(f) Fxd(c) Jc(c) H(83%) B(0) Ai(c) P(8px) C(white)">
         </figcaption>
       </Link>
     </figure>;

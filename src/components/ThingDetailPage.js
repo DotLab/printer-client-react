@@ -7,7 +7,7 @@ import ThingDetailRemix from './ThingDetailRemix';
 import ThingDetailLicense from './ThingDetailLicense';
 
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './utils';
-import {formatDate, formatNumberShort} from '../utils';
+import {formatDate, formatNumberShort, getFullLicenseName} from '../utils';
 
 export default class ThingDetailPage extends React.Component {
   constructor(props) {
@@ -52,10 +52,10 @@ export default class ThingDetailPage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    const {tab, uploaderName, fileName, fileSize, name, license, category, type, summary, printerBrand,
+    const {tab, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount, remixCount} = this.state;
+    console.log(getFullLicenseName(license));
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -93,11 +93,14 @@ export default class ThingDetailPage extends React.Component {
           </span>
         </div>
 
-        {tab === DETAIL && <ThingDetailInfo fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)} summary={summary}/>}
-        {tab === COMMENTS && <ThingDetailComment/>}
+        {tab === DETAIL && <ThingDetailInfo fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)}
+          summary={summary} printerBrand={printerBrand} raft={raft} support={support} resolution={resolution} infill={infill}
+          filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
+        />}
+        {tab === COMMENTS && <ThingDetailComment commentCount={commentCount}/>}
         {tab === MAKES && <ThingDetailMake/>}
         {tab === REMIXES && <ThingDetailRemix/>}
-        {tab === LICENSE && <ThingDetailLicense/>}
+        {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 
       </div>
     </div>;
