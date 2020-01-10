@@ -84,6 +84,11 @@ export default class App extends React.Component {
     console.log(id);
   }
 
+  async thingList({category, type, sort, order, limit, skip, search}) {
+    const res = await this.genericApi1('/v1/things/listing', {category, type, sort, order, limit, skip, search});
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>

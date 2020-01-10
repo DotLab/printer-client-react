@@ -17,10 +17,20 @@ export default class Register extends React.Component {
     };
 
     this.checkPasswordMatch = this.checkPasswordMatch.bind(this);
+    this.register = this.register.bind(this);
   }
 
   checkPasswordMatch() {
     return (this.state.password === this.state.passwordConfirm);
+  }
+
+  async register(e) {
+    e.preventDefault();
+    try {
+      await this.app.userRegister(this.state);
+    } catch (err) {
+      this.setState({userName: '', email: '', password: '', passwordConfirm: ''});
+    }
   }
 
   render() {
@@ -46,7 +56,7 @@ export default class Register extends React.Component {
               <span class="Fz(14px) Fw(b)">Password confirmation</span>
               <input class={INPUT_STYLE} type="password" name="password" onChange={this.onChange} required/>
             </div>
-            <button class="C(white) D(b) W(100%) Bgc(dimgray) Bgc(black):h Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t)" disabled={!this.checkPasswordMatch()} onClick={this.login}>Register</button>
+            <button class="C(white) D(b) W(100%) Bgc(dimgray) Bgc(black):h Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t)" disabled={!this.checkPasswordMatch()} onClick={this.register}>Register</button>
           </form>
 
         </div>
