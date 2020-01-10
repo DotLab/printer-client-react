@@ -20,6 +20,7 @@ export default class ThingCreatePage extends React.Component {
     this.state = {
       subTypes: null,
       printingSettings: true,
+      inputKey: null,
 
       buffer: null,
       fileName: null,
@@ -44,6 +45,7 @@ export default class ThingCreatePage extends React.Component {
     this.onChange = onChange.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
+    this.deleteFile = this.deleteFile.bind(this);
     this.createThing = this.createThing.bind(this);
     this.checkRequiredFilled = this.checkRequiredFilled.bind(this);
   }
@@ -73,9 +75,13 @@ export default class ThingCreatePage extends React.Component {
     fr.readAsArrayBuffer(e.target.files[0]);
   }
 
+  deleteFile(e) {
+    e.preventDefault();
+    this.setState({fileName: null, fileSize: null, buffer: null, inputKey: new Date()});
+  }
+
   createThing(e) {
     e.preventDefault();
-    console.log(this.state);
     const {buffer, fileName, fileSize, name, license, category, type, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note} = this.state;
     if (!buffer || !name || !license || !type || !summary) {
@@ -98,8 +104,7 @@ export default class ThingCreatePage extends React.Component {
       <div class="W(70%) Mx(a)">
         <div class="Bds(s) Ta(c) H(300px)">
           <div class="Py(80px)">
-            <label>Drag files here</label>
-            <div class="Fz(12px) Pstart(40px) My(20px)">Or <input type="file" name="file" onChange={this.onFileChange}/>
+            <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" onChange={this.onFileChange}/>
             </div>
           </div>
         </div>
@@ -107,7 +112,7 @@ export default class ThingCreatePage extends React.Component {
           {fileName && <div class="Fz(16px)">
             <i class="fas fa-file-alt"></i>
             <span>{fileName}</span>
-            <span class="Fl(end) Cur(p)"><i class="fas fa-times"></i></span>
+            <span class="Fl(end) Cur(p)" onClick={this.deleteFile}><i class="fas fa-times"></i></span>
           </div>}
           <form class="Px(12px) Bdrs(4px) My(30px) W(100%)">
             <div class="W(100%)">
