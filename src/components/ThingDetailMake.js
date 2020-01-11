@@ -5,6 +5,15 @@ export default class ThingDetailMake extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
+
+    this.state = {
+      makes: [],
+    };
+  }
+
+  async componentDidMount() {
+    const makes = await this.props.thingMakeList({thingId: this.props.thingId});
+    this.setState({makes});
   }
 
   render() {

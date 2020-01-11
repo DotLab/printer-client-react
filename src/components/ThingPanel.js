@@ -39,7 +39,7 @@ export default class ThingOverview extends React.Component {
   }
 
   render() {
-    const {likeCount, bookmarkCount, downloadCount, makeCount, remixCount, liked, bookmarked, downloadLink, thingId} = this.props;
+    const {likeCount, bookmarkCount, downloadCount, makeCount, remixCount, liked, bookmarked, downloadLink, thingId, isLoggedIn} = this.props;
 
     return <div>
       {!liked && <span class="Mend(26px) Cur(p)" onClick={this.like}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
@@ -49,7 +49,8 @@ export default class ThingOverview extends React.Component {
       {bookmarked && <span class="Mend(26px) Cur(p) C(#0280ae)" onClick={this.unBookmark}><i class="fas fa-bookmark"></i> {bookmarkCount}</span>}
 
       <a href={downloadLink} class="Mend(26px) Cur(p) C(black) Td(n):h" onClick={this.download}><i class="fas fa-download"></i>  {downloadCount}</a>
-      <Link to={{pathname: `/things/${thingId}/makes/new`}} class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>
+      {isLoggedIn && <Link to={{pathname: `/things/${thingId}/makes/new`}} class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>}
+      {!isLoggedIn && <Link to='/login' class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>}
       <Link to="/remixes/new"class="Td(n):h Fz(16px) C(black) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>
     </div>
     ;

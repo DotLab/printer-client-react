@@ -16,7 +16,7 @@ export default class ThingDetailPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-      tab: DETAIL,
+      tab: MAKES,
       uploaderName: null,
       fileName: null,
       fileSize: null,
@@ -45,6 +45,7 @@ export default class ThingDetailPage extends React.Component {
       makeCount: null,
       remixCount: null,
       comments: [],
+      makes: [],
       liked: false,
       bookmarked: false,
       downloadLink: null,
@@ -58,6 +59,7 @@ export default class ThingDetailPage extends React.Component {
     this.bookmark = this.bookmark.bind(this);
     this.unBookmark = this.unBookmark.bind(this);
     this.download = this.download.bind(this);
+    this.thingMakeList = this.thingMakeList.bind(this);
   }
 
   async componentDidMount() {
@@ -123,6 +125,11 @@ export default class ThingDetailPage extends React.Component {
     this.setState({downloadCount});
   }
 
+  async thingMakeList() {
+    const makes = await this.app.thingMakeList({thingId: this.state._id});
+    this.setState({makes});
+  }
+
   render() {
     const {tab, _id, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
@@ -143,7 +150,7 @@ export default class ThingDetailPage extends React.Component {
             remixCount={remixCount} like={this.like} unlike={this.unlike} liked={liked}
             bookmark={this.bookmark} unBookmark={this.unBookmark} bookmarked={bookmarked}
             download={this.download} downloadLink={downloadLink} downloadCount={downloadCount}
-            thingId={_id}/>
+            thingId={_id} isLoggedIn={this.app.state.token}/>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
           <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>
@@ -169,7 +176,7 @@ export default class ThingDetailPage extends React.Component {
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount}/>}
-        {tab === MAKES && <ThingDetailMake/>}
+        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList}/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 
