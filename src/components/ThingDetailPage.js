@@ -113,7 +113,7 @@ export default class ThingDetailPage extends React.Component {
   }
 
   render() {
-    const {tab, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
+    const {tab, _id, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, commentCount, makeCount,
       remixCount, comments, liked, bookmarked, downloadLink} = this.state;
@@ -132,7 +132,7 @@ export default class ThingDetailPage extends React.Component {
           <ThingPanel likeCount={likeCount} bookmarkCount={bookmarkCount} makeCount={makeCount}
             remixCount={remixCount} like={this.like} unlike={this.unlike} liked={liked}
             bookmark={this.bookmark} unBookmark={this.unBookmark} bookmarked={bookmarked}
-            download={this.download} downloadLink={downloadLink}/>
+            download={this.download} downloadLink={downloadLink} thingId={_id}/>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
           <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>

@@ -7,7 +7,6 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import PasswordResetPage from './components/PasswordResetPage';
 import ThingDetailPage from './components/ThingDetailPage';
-import ThingMakeListingPage from './components/ThingMakeListingPage';
 import MakeCreatePage from './components/MakeCreatePage';
 import Make from './components/Make';
 import ThingCreatePage from './components/ThingCreatePage';
@@ -150,6 +149,20 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async getThingNames({token, thingId}) {
+    const res = await this.genericApi1('/v1/things/names', {token, thingId});
+    return res.payload;
+  }
+
+  async createMake({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
+    buffer, fileName, fileSize, name, description, printerBrand, raft, support, resolution,
+    infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
+    const res = await this.genericApi1('/v1/things/upload', {sourceThingId, sourceThingName, sourceThingUploaderId,
+      sourceThingUploaderName, buffer, fileName, fileSize, name, description, printerBrand, raft, support,
+      resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token});
+    console.log(res);
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
@@ -160,11 +173,10 @@ export default class App extends React.Component {
         <PropsRoute exact path="/register" component={RegisterPage} app={this}/>
         <PropsRoute exact path="/login" component={LoginPage} app={this}/>
         <PropsRoute exact path="/password-reset" component={PasswordResetPage} app={this}/>
-        <PropsRoute exact path="/things/makes" component={ThingMakeListingPage} app={this}/>
+        <PropsRoute exact path="/things/:thingId/makes/new" component={MakeCreatePage} app={this}/>
         <PropsRoute exact path="/makes/detail" component={Make} app={this}/>
         <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
-        <PropsRoute exact path="/things/new/make" component={MakeCreatePage} app={this}/>
       </Switch>
     </div>;
   }
