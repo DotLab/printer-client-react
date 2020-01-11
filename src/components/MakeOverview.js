@@ -8,14 +8,14 @@ export default class MakeOverview extends React.Component {
   }
 
   render() {
-    const {name, uploaderName} = this.props;
+    const {thingName, uploaderName} = this.props;
 
     return <figure class="Pos(r) D(ib) Maw(320px) M(20px)">
       <div class="D(f)">
         <div class="Bdrs(100%) Mend(20px) D(b)"><i class="fas fa-print"></i></div>
         <div>
-          <div class="C(black) Td(u):h Cur(p)">{name}</div>
-          <div class="Fz(14px) C($gray-500)">{uploaderName}</div>
+          <div class="Fz(14px) C($gray-500)">make of <span class="C(black) Td(u):h Cur(p) Fz(18px) Mstart(4px)"> {thingName}</span></div>
+          <div class="Fz(14px) C($gray-500)">by <span class="C(black) Td(u):h Cur(p) Fz(18px) Mstart(4px)"> {uploaderName}</span></div>
         </div>
       </div>
       <div>

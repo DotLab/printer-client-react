@@ -77,7 +77,7 @@ export default class ThingDetailPage extends React.Component {
   }
 
   async getThingComments() {
-    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    const comments = await this.app.getCommentList({thingId: this.props.match.params.thingId, token: this.app.state.token, limit: LIMIT});
     this.setState({comments});
   }
 
@@ -130,7 +130,7 @@ export default class ThingDetailPage extends React.Component {
   }
 
   async thingMakeList() {
-    const makes = await this.app.thingMakeList({thingId: this.state._id, limit: LIMIT});
+    const makes = await this.app.thingMakeList({thingId: this.props.match.params.thingId, limit: LIMIT});
     this.setState({makes});
   }
 
@@ -180,7 +180,7 @@ export default class ThingDetailPage extends React.Component {
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
-        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList} makes={makes}/>}
+        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList} makes={makes} thingName={name}/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 

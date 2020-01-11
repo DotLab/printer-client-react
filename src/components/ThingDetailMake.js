@@ -5,25 +5,18 @@ export default class ThingDetailMake extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
-
-    this.state = {
-      makes: [],
-    };
   }
 
   async componentDidMount() {
-    await this.props.thingMakeList({thingId: this.props.thingId});
+    await this.props.thingMakeList();
   }
 
   render() {
-    const {makes} = this.props;
-
+    const {makes, thingName} = this.props;
+    console.log(makes);
     return <div class="Py(30px) My(10px)">
-      {makes.map((make) => <MakeOverview key={make._id} id={make._id} />)}
-
-      {/* <MakeOverview/>
-      <MakeOverview/> */}
-
+      {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}
+        thingName={thingName}/>)}
     </div>;
   }
 }
