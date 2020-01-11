@@ -78,10 +78,9 @@ export default class App extends React.Component {
 
   async createThing({fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
     raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
-    const id = await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
+    await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
       license, category, type, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, token});
-    console.log(id);
   }
 
   async thingList({category, type, sort, order, limit, skip, search}) {
@@ -117,7 +116,6 @@ export default class App extends React.Component {
 
   async thingLikeCount({thingId}) {
     const res = await this.genericApi1('/v1/things/likecount', {thingId});
-    console.log(res);
     return res.payload;
   }
 
@@ -136,7 +134,6 @@ export default class App extends React.Component {
 
   async thingBookmarkCount({thingId}) {
     const res = await this.genericApi1('/v1/things/bookmarkcount', {thingId});
-    console.log(res);
     return res.payload;
   }
 
