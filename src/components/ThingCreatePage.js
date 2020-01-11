@@ -11,7 +11,6 @@ const ALL = 'All';
 const INPUT_STYLE = 'W(84%) H(40px) Fz(14px) Bdc(t) O(n) Bdbs(s):h Bdbc(black):f Bdbc(lightgray) Mb(30px)';
 const MAX_SIZE = 1048576;
 const PLACEHOLDER = 'placeholder';
-const NA = 'doesn\'t matter';
 
 export default class ThingCreatePage extends React.Component {
   constructor(props) {
@@ -31,10 +30,10 @@ export default class ThingCreatePage extends React.Component {
       license: null,
       category: ALL,
       type: ALL,
-      summary: null,
+      summary: '',
       printerBrand: null,
-      raft: NA,
-      support: NA,
+      raft: null,
+      support: null,
       resolution: null,
       infill: null,
       filamentBrand: null,
@@ -194,7 +193,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="raft" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value={NA} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
                   </div>
                 </div>
 
@@ -203,7 +202,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="support" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value={NA} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
                   </div>
                 </div>
 

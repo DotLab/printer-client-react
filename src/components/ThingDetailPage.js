@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import ThingDetailInfo from './ThingDetailInfo';
+import ThingPanel from './ThingPanel';
 import ThingDetailComment from './ThingDetailComment';
 import ThingDetailMake from './ThingDetailMake';
 import ThingDetailRemix from './ThingDetailRemix';
@@ -16,7 +16,7 @@ export default class ThingDetailPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-      tab: COMMENTS,
+      tab: DETAIL,
       uploaderName: null,
       fileName: null,
       fileSize: null,
@@ -40,23 +40,33 @@ export default class ThingDetailPage extends React.Component {
       uploadDate: null,
       likeCount: null,
       bookmarkCount: null,
-      downloadCount: null,
       commentCount: null,
       makeCount: null,
       remixCount: null,
       comments: [],
+      liked: false,
+      bookmarked: false,
+      downloadLink: null,
     };
 
     this.makeComment = this.makeComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.checkLogin = this.checkLogin.bind(this);
+    this.like = this.like.bind(this);
+    this.unlike = this.unlike.bind(this);
+    this.bookmark = this.bookmark.bind(this);
+    this.unBookmark = this.unBookmark.bind(this);
   }
 
   async componentDidMount() {
     const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
     this.setState(thing);
+    const liked = await this.app.thingLikeStatus({thingId: this.state._id, token: this.app.state.token});
+    const bookmarked = await this.app.thingBookmarkStatus({thingId: this.state._id, token: this.app.state.token});
     const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
-    this.setState({comments});
+    const downloadLink = await this.app.download({token: this.app.state.token, thingId: this.state._id});
+    this.setState({comments, liked, bookmarked, downloadLink});
+    console.log(this.state);
   }
 
   async makeComment(comment) {
@@ -77,11 +87,36 @@ export default class ThingDetailPage extends React.Component {
     }
   }
 
+  async like() {
+    await this.app.likeThing({token: this.app.state.token, thingId: this.state._id});
+    const likeCount = await this.app.thingLikeCount({thingId: this.state._id});
+    this.setState({likeCount, liked: true});
+  }
+
+  async unlike() {
+    await this.app.unlikeThing({token: this.app.state.token, thingId: this.state._id});
+    const likeCount = await this.app.thingLikeCount({thingId: this.state._id});
+    this.setState({likeCount, liked: false});
+  }
+
+  async bookmark() {
+    await this.app.bookmarkThing({token: this.app.state.token, thingId: this.state._id});
+    const bookmarkCount = await this.app.thingBookmarkCount({thingId: this.state._id});
+    this.setState({bookmarkCount, bookmarked: true});
+  }
+
+  async unBookmark() {
+    await this.app.unBookmarkThing({token: this.app.state.token, thingId: this.state._id});
+    const bookmarkCount = await this.app.thingBookmarkCount({thingId: this.state._id});
+    console.log(bookmarkCount);
+    this.setState({bookmarkCount, bookmarked: false});
+  }
+
   render() {
     const {tab, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
-      note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
-      remixCount, comments} = this.state;
+      note, uploadDate, likeCount, bookmarkCount, commentCount, makeCount,
+      remixCount, comments, liked, bookmarked, downloadLink} = this.state;
     console.log(this.state);
 
     return <div>
@@ -94,13 +129,10 @@ export default class ThingDetailPage extends React.Component {
               <div class="Fz(14px) C($gray-500)">{uploaderName}</div>
             </div>
           </div>
-          <div>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-thumbs-up"></i> {likeCount}</span>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-bookmark"></i> {bookmarkCount}</span>
-            <span class="Mend(26px) Cur(p)"><i class="fas fa-download"></i> {downloadCount}</span>
-            <Link to="/things/new/make" class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>
-            <Link to="/things/new/remix"class="Td(n):h Fz(16px) C(black) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>
-          </div>
+          <ThingPanel likeCount={likeCount} bookmarkCount={bookmarkCount} makeCount={makeCount}
+            remixCount={remixCount} like={this.like} unlike={this.unlike} liked={liked}
+            bookmark={this.bookmark} unBookmark={this.unBookmark} bookmarked={bookmarked}
+            download={this.download} downloadLink={downloadLink}/>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
           <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>

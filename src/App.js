@@ -103,9 +103,50 @@ export default class App extends React.Component {
   }
 
   async getCommentList({thingId, token, limit}) {
-    console.log(thingId, token, limit);
     const res = await this.genericApi1('/v1/things/comment/list', {thingId, token, limit});
+    return res.payload;
+  }
+
+  async likeThing({token, thingId}) {
+    await this.genericApi1('/v1/things/like', {token, thingId});
+  }
+
+  async unlikeThing({token, thingId}) {
+    await this.genericApi1('/v1/things/unlike', {token, thingId});
+  }
+
+  async thingLikeCount({thingId}) {
+    const res = await this.genericApi1('/v1/things/likecount', {thingId});
     console.log(res);
+    return res.payload;
+  }
+
+  async thingLikeStatus({token, thingId}) {
+    const res = await this.genericApi1('/v1/things/likestatus', {token, thingId});
+    return res.payload;
+  }
+
+  async bookmarkThing({token, thingId}) {
+    await this.genericApi1('/v1/things/bookmark', {token, thingId});
+  }
+
+  async unBookmarkThing({token, thingId}) {
+    await this.genericApi1('/v1/things/unbookmark', {token, thingId});
+  }
+
+  async thingBookmarkCount({thingId}) {
+    const res = await this.genericApi1('/v1/things/bookmarkcount', {thingId});
+    console.log(res);
+    return res.payload;
+  }
+
+  async thingBookmarkStatus({token, thingId}) {
+    const res = await this.genericApi1('/v1/things/bookmarkstatus', {token, thingId});
+    return res.payload;
+  }
+
+  async download({token, thingId}) {
+    const res = await this.genericApi1('/v1/things/download', {token, thingId});
     return res.payload;
   }
 
