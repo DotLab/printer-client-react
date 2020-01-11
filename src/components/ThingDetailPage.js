@@ -51,6 +51,7 @@ export default class ThingDetailPage extends React.Component {
       downloadLink: null,
     };
 
+    this.getThingComments = this.getThingComments.bind(this);
     this.makeComment = this.makeComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.checkLogin = this.checkLogin.bind(this);
@@ -67,14 +68,17 @@ export default class ThingDetailPage extends React.Component {
     this.setState(thing);
     let liked = false;
     let bookmarked = false;
-    let comments = [];
     if (this.app.state.token) {
       liked = await this.app.thingLikeStatus({thingId: this.state._id, token: this.app.state.token});
       bookmarked = await this.app.thingBookmarkStatus({thingId: this.state._id, token: this.app.state.token});
-      comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
     }
     const downloadLink = await this.app.getSignedUrl({thingId: this.state._id});
-    this.setState({comments, liked, bookmarked, downloadLink});
+    this.setState({liked, bookmarked, downloadLink});
+  }
+
+  async getThingComments() {
+    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    this.setState({comments});
   }
 
   async makeComment(comment) {
@@ -175,7 +179,7 @@ export default class ThingDetailPage extends React.Component {
           filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
-          deleteComment={this.deleteComment} commentCount={commentCount}/>}
+          deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
         {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList}/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}

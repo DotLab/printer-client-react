@@ -18,6 +18,10 @@ export default class ThingDetailComment extends React.Component {
     this.deleteComment = this.deleteComment.bind(this);
   }
 
+  async componentDidMount() {
+    await this.props.getThingComments();
+  }
+
   async makeComment(e) {
     e.preventDefault();
     await this.props.makeComment(this.state.comment);
