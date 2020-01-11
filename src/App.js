@@ -170,8 +170,8 @@ export default class App extends React.Component {
     console.log(res);
   }
 
-  async thingMakeList({thingId}) {
-    const res = await this.genericApi1('/v1/things/make/list', {thingId});
+  async thingMakeList({thingId, limit}) {
+    const res = await this.genericApi1('/v1/things/make/list', {thingId, limit});
     console.log(res);
     return res.payload;
   }

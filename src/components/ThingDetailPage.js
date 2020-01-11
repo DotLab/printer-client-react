@@ -130,7 +130,7 @@ export default class ThingDetailPage extends React.Component {
   }
 
   async thingMakeList() {
-    const makes = await this.app.thingMakeList({thingId: this.state._id});
+    const makes = await this.app.thingMakeList({thingId: this.state._id, limit: LIMIT});
     this.setState({makes});
   }
 
@@ -138,7 +138,7 @@ export default class ThingDetailPage extends React.Component {
     const {tab, _id, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
-      remixCount, comments, liked, bookmarked, downloadLink} = this.state;
+      remixCount, comments, makes, liked, bookmarked, downloadLink} = this.state;
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -180,7 +180,7 @@ export default class ThingDetailPage extends React.Component {
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
-        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList}/>}
+        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList} makes={makes}/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 

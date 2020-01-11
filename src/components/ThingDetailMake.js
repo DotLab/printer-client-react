@@ -12,14 +12,17 @@ export default class ThingDetailMake extends React.Component {
   }
 
   async componentDidMount() {
-    const makes = await this.props.thingMakeList({thingId: this.props.thingId});
-    this.setState({makes});
+    await this.props.thingMakeList({thingId: this.props.thingId});
   }
 
   render() {
+    const {makes} = this.props;
+
     return <div class="Py(30px) My(10px)">
-      <MakeOverview/>
-      <MakeOverview/>
+      {makes.map((make) => <MakeOverview key={make._id} id={make._id} />)}
+
+      {/* <MakeOverview/>
+      <MakeOverview/> */}
 
     </div>;
   }
