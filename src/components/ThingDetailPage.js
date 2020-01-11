@@ -40,6 +40,7 @@ export default class ThingDetailPage extends React.Component {
       uploadDate: null,
       likeCount: null,
       bookmarkCount: null,
+      downloadCount: null,
       commentCount: null,
       makeCount: null,
       remixCount: null,
@@ -56,15 +57,21 @@ export default class ThingDetailPage extends React.Component {
     this.unlike = this.unlike.bind(this);
     this.bookmark = this.bookmark.bind(this);
     this.unBookmark = this.unBookmark.bind(this);
+    this.download = this.download.bind(this);
   }
 
   async componentDidMount() {
     const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
     this.setState(thing);
-    const liked = await this.app.thingLikeStatus({thingId: this.state._id, token: this.app.state.token});
-    const bookmarked = await this.app.thingBookmarkStatus({thingId: this.state._id, token: this.app.state.token});
-    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
-    const downloadLink = await this.app.download({token: this.app.state.token, thingId: this.state._id});
+    let liked = false;
+    let bookmarked = false;
+    let comments = [];
+    if (this.app.state.token) {
+      liked = await this.app.thingLikeStatus({thingId: this.state._id, token: this.app.state.token});
+      bookmarked = await this.app.thingBookmarkStatus({thingId: this.state._id, token: this.app.state.token});
+      comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    }
+    const downloadLink = await this.app.getSignedUrl({thingId: this.state._id});
     this.setState({comments, liked, bookmarked, downloadLink});
   }
 
@@ -110,10 +117,16 @@ export default class ThingDetailPage extends React.Component {
     this.setState({bookmarkCount, bookmarked: false});
   }
 
+  async download() {
+    await this.app.download({thingId: this.state._id});
+    const downloadCount = await this.app.thingDownloadCount({thingId: this.state._id});
+    this.setState({downloadCount});
+  }
+
   render() {
     const {tab, _id, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
-      note, uploadDate, likeCount, bookmarkCount, commentCount, makeCount,
+      note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
       remixCount, comments, liked, bookmarked, downloadLink} = this.state;
 
     return <div>
@@ -129,7 +142,8 @@ export default class ThingDetailPage extends React.Component {
           <ThingPanel likeCount={likeCount} bookmarkCount={bookmarkCount} makeCount={makeCount}
             remixCount={remixCount} like={this.like} unlike={this.unlike} liked={liked}
             bookmark={this.bookmark} unBookmark={this.unBookmark} bookmarked={bookmarked}
-            download={this.download} downloadLink={downloadLink} thingId={_id}/>
+            download={this.download} downloadLink={downloadLink} downloadCount={downloadCount}
+            thingId={_id}/>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
           <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>

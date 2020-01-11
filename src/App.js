@@ -141,8 +141,18 @@ export default class App extends React.Component {
     return res.payload;
   }
 
-  async download({token, thingId}) {
-    const res = await this.genericApi1('/v1/things/download', {token, thingId});
+  async getSignedUrl({thingId}) {
+    const res = await this.genericApi1('/v1/things/signed-url', {thingId});
+    return res.payload;
+  }
+
+  async download({thingId}) {
+    const res = await this.genericApi1('/v1/things/download', {thingId});
+    return res.payload;
+  }
+
+  async thingDownloadCount({thingId}) {
+    const res = await this.genericApi1('/v1/things/downloadcount', {thingId});
     return res.payload;
   }
 
