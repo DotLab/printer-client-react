@@ -193,7 +193,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="raft" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>
 
@@ -202,7 +202,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="support" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>
 
