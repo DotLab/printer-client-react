@@ -22,7 +22,6 @@ export default class ThingCreatePage extends React.Component {
       buffer: null,
       fileName: null,
       fileSize: null,
-      name: null,
 
       description: '',
       printerBrand: null,
@@ -45,6 +44,7 @@ export default class ThingCreatePage extends React.Component {
   async componentDidMount() {
     const source = await this.app.getThingNames({token: this.app.state.token, thingId: this.props.match.params.thingId});
     this.setState({sourceThingName: source.name, sourceThingUploaderId: source.uploaderId, sourceThingUploaderName: source.uploaderName});
+    console.log(this.state);
   }
 
   onFileChange(e) {
@@ -72,13 +72,13 @@ export default class ThingCreatePage extends React.Component {
   createMake(e) {
     e.preventDefault();
     const {sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
-      buffer, fileName, fileSize, name, description, printerBrand, raft, support, resolution,
+      buffer, fileName, fileSize, description, printerBrand, raft, support, resolution,
       infill, filamentBrand, filamentColor, filamentMaterial, note} = this.state;
     if (!buffer) {
       return;
     }
     this.app.createMake({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
-      buffer, fileName, fileSize, name, description, printerBrand, raft, support, resolution,
+      buffer, fileName, fileSize, description, printerBrand, raft, support, resolution,
       infill, filamentBrand, filamentColor, filamentMaterial, note,
       token: this.app.state.token});
   }
@@ -125,7 +125,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="raft" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@ export default class ThingCreatePage extends React.Component {
                   <div>
                     <input type="radio" name="support" onChange={this.onChange} value="YES"/> Yes
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="NO"/> No
-                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value={null} defaultChecked/> Doesn't matter
+                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>
 

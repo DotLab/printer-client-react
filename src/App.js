@@ -152,10 +152,10 @@ export default class App extends React.Component {
   }
 
   async createMake({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
-    buffer, fileName, fileSize, name, description, printerBrand, raft, support, resolution,
+    buffer, fileName, fileSize, description, printerBrand, raft, support, resolution,
     infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
-    const res = await this.genericApi1('/v1/things/upload', {sourceThingId, sourceThingName, sourceThingUploaderId,
-      sourceThingUploaderName, buffer, fileName, fileSize, name, description, printerBrand, raft, support,
+    const res = await this.genericApi1('/v1/makes/upload', {sourceThingId, sourceThingName, sourceThingUploaderId,
+      sourceThingUploaderName, buffer, fileName, fileSize, description, printerBrand, raft, support,
       resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token});
     console.log(res);
   }
