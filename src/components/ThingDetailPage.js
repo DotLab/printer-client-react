@@ -66,7 +66,6 @@ export default class ThingDetailPage extends React.Component {
     const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
     const downloadLink = await this.app.download({token: this.app.state.token, thingId: this.state._id});
     this.setState({comments, liked, bookmarked, downloadLink});
-    console.log(this.state);
   }
 
   async makeComment(comment) {
@@ -108,7 +107,6 @@ export default class ThingDetailPage extends React.Component {
   async unBookmark() {
     await this.app.unBookmarkThing({token: this.app.state.token, thingId: this.state._id});
     const bookmarkCount = await this.app.thingBookmarkCount({thingId: this.state._id});
-    console.log(bookmarkCount);
     this.setState({bookmarkCount, bookmarked: false});
   }
 
@@ -117,7 +115,6 @@ export default class ThingDetailPage extends React.Component {
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, commentCount, makeCount,
       remixCount, comments, liked, bookmarked, downloadLink} = this.state;
-    console.log(this.state);
 
     return <div>
       <div class="W(70%) Mx(a)">

@@ -35,7 +35,7 @@ export default class ThingOverview extends React.Component {
 
   render() {
     const {likeCount, bookmarkCount, makeCount, remixCount, liked, bookmarked, downloadLink, thingId} = this.props;
-    console.log(downloadLink);
+
     return <div>
       {!liked && <span class="Mend(26px) Cur(p)" onClick={this.like}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
       {liked && <span class="Mend(26px) Cur(p) C(#0280ae)" onClick={this.unlike}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
