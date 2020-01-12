@@ -191,8 +191,8 @@ export default class ThingCreatePage extends React.Component {
                 <div class="Mt($m-control)">
                   <span class="Fz(14px) Fw(b)">Rafts</span>
                   <div>
-                    <input type="radio" name="raft" onChange={this.onChange} value="YES"/> Yes
-                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="NO"/> No
+                    <input type="radio" name="raft" onChange={this.onChange} value="Yes"/> Yes
+                    <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="No"/> No
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>
@@ -200,8 +200,8 @@ export default class ThingCreatePage extends React.Component {
                 <div class="Mt($m-control)">
                   <span class="Fz(14px) Fw(b)">Support</span>
                   <div>
-                    <input type="radio" name="support" onChange={this.onChange} value="YES"/> Yes
-                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="NO"/> No
+                    <input type="radio" name="support" onChange={this.onChange} value="Yes"/> Yes
+                    <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="No"/> No
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
                   </div>
                 </div>

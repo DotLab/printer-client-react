@@ -8,7 +8,7 @@ import RegisterPage from './components/RegisterPage';
 import PasswordResetPage from './components/PasswordResetPage';
 import ThingDetailPage from './components/ThingDetailPage';
 import MakeCreatePage from './components/MakeCreatePage';
-import Make from './components/Make';
+import MakeDetailPage from './components/MakeDetailPage';
 import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
@@ -45,8 +45,12 @@ export default class App extends React.Component {
           resolve(response.data);
         } else {
           reject(response.data);
+          this.userLogOut();
+          this.userLogin({email: 'kai@gmail.com', password: '123'});
         }
-      }).catch((err) => reject(err));
+      }).catch((err) => {
+        reject(err);
+      });
     });
   }
 
@@ -92,15 +96,15 @@ export default class App extends React.Component {
     return res.payload;
   }
 
-  async comment({comment, thingId, token}) {
+  async commentThing({comment, thingId, token}) {
     await this.genericApi1('/v1/things/comment/create', {comment, thingId, token});
   }
 
-  async deleteComment({commentId, token}) {
+  async deleteCommentThing({commentId, token}) {
     await this.genericApi1('/v1/things/comment/delete', {commentId, token});
   }
 
-  async getCommentList({thingId, token, limit}) {
+  async getThingCommentList({thingId, token, limit}) {
     const res = await this.genericApi1('/v1/things/comment/list', {thingId, token, limit});
     return res.payload;
   }
@@ -161,6 +165,44 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async likeMake({token, makeId}) {
+    const res = await this.genericApi1('/v1/makes/like', {token, makeId});
+    console.log('end of likemake ', res);
+  }
+
+  async unlikeMake({token, makeId}) {
+    await this.genericApi1('/v1/makes/unlike', {token, makeId});
+  }
+
+  async makeLikeCount({makeId}) {
+    const res = await this.genericApi1('/v1/makes/likecount', {makeId});
+    console.log('makeLikeCount', res);
+    return res.payload;
+  }
+
+  async makeLikeStatus({token, makeId}) {
+    const res = await this.genericApi1('/v1/makes/likestatus', {token, makeId});
+    return res.payload;
+  }
+
+  async makeDetail({makeId}) {
+    const res = await this.genericApi1('/v1/makes/detail', {makeId});
+    return res.payload;
+  }
+
+  async commentMake({comment, makeId, token}) {
+    await this.genericApi1('/v1/makes/comment/create', {comment, makeId, token});
+  }
+
+  async deleteCommentMake({commentId, token}) {
+    await this.genericApi1('/v1/makes/comment/delete', {commentId, token});
+  }
+
+  async getMakeCommentList({makeId, token, limit}) {
+    const res = await this.genericApi1('/v1/makes/comment/list', {makeId, token, limit});
+    return res.payload;
+  }
+
   async createMake({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
     buffer, fileName, fileSize, description, printerBrand, raft, support, resolution,
     infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
@@ -168,6 +210,7 @@ export default class App extends React.Component {
       sourceThingUploaderName, buffer, fileName, fileSize, description, printerBrand, raft, support,
       resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token});
     console.log(res);
+    this.history.push(`/makes/${res.payload}`);
   }
 
   async thingMakeList({thingId, limit}) {
@@ -187,7 +230,7 @@ export default class App extends React.Component {
         <PropsRoute exact path="/login" component={LoginPage} app={this}/>
         <PropsRoute exact path="/password-reset" component={PasswordResetPage} app={this}/>
         <PropsRoute exact path="/things/:thingId/makes/new" component={MakeCreatePage} app={this}/>
-        <PropsRoute exact path="/makes/detail" component={Make} app={this}/>
+        <PropsRoute exact path="/makes/:makeId" component={MakeDetailPage} app={this}/>
         <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
       </Switch>

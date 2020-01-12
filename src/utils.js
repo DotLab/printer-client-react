@@ -162,3 +162,5 @@ const dict = {
 export function getFullLicenseName(license) {
   return dict[license];
 }
+
+export const LIMIT = 20;

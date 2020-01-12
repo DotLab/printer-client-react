@@ -7,8 +7,7 @@ import ThingDetailRemix from './ThingDetailRemix';
 import ThingDetailLicense from './ThingDetailLicense';
 
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './utils';
-import {formatDate, formatNumberShort, getFullLicenseName} from '../utils';
-const LIMIT = 20;
+import {formatDate, formatNumberShort, getFullLicenseName, LIMIT} from '../utils';
 
 export default class ThingDetailPage extends React.Component {
   constructor(props) {
@@ -21,7 +20,7 @@ export default class ThingDetailPage extends React.Component {
       fileName: null,
       fileSize: null,
 
-      _id: null,
+      _id: this.props.match.params.thingId,
       name: null,
       license: null,
       category: null,
@@ -77,19 +76,19 @@ export default class ThingDetailPage extends React.Component {
   }
 
   async getThingComments() {
-    const comments = await this.app.getCommentList({thingId: this.props.match.params.thingId, token: this.app.state.token, limit: LIMIT});
+    const comments = await this.app.getThingCommentList({thingId: this.props.match.params.thingId, token: this.app.state.token, limit: LIMIT});
     this.setState({comments});
   }
 
   async makeComment(comment) {
-    await this.app.comment({thingId: this.state._id, comment, token: this.app.state.token});
-    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    await this.app.commentThing({thingId: this.state._id, comment, token: this.app.state.token});
+    const comments = await this.app.getThingCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
     this.setState({comments});
   }
 
   async deleteComment(commentId) {
-    await this.app.deleteComment({commentId, token: this.app.state.token});
-    const comments = await this.app.getCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
+    await this.app.deleteCommentThing({commentId, token: this.app.state.token});
+    const comments = await this.app.getThingCommentList({thingId: this.state._id, token: this.app.state.token, limit: LIMIT});
     this.setState({comments});
   }
 
@@ -180,7 +179,7 @@ export default class ThingDetailPage extends React.Component {
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
-        {tab === MAKES && <ThingDetailMake thingId={_id} thingMakeList={this.thingMakeList} makes={makes} thingName={name}/>}
+        {tab === MAKES && <ThingDetailMake thingMakeList={this.thingMakeList} makes={makes} thingName={name}/>}
         {tab === REMIXES && <ThingDetailRemix/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 
