@@ -21,6 +21,9 @@ export default class ThingDetailPage extends React.Component {
       fileSize: null,
 
       _id: this.props.match.params.thingId,
+      sourceThingId: null,
+      sourceThingName: null,
+      sourceThingUploaderName: null,
       name: null,
       license: null,
       category: null,
@@ -142,7 +145,8 @@ export default class ThingDetailPage extends React.Component {
   }
 
   render() {
-    const {uploaderName, fileName, fileSize, name, license, summary, printerBrand,
+    const {sourceThingId, sourceThingName, sourceThingUploaderName,
+      uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
       remixCount, comments, makes, liked, bookmarked, downloadLink, _id, remixes} = this.state;
@@ -182,7 +186,9 @@ export default class ThingDetailPage extends React.Component {
           </Link>
         </div>
 
-        {tab === DETAIL && <ThingDetailInfo fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)}
+        {tab === DETAIL && <ThingDetailInfo
+          sourceThingId={sourceThingId} sourceThingName={sourceThingName} sourceThingUploaderName={sourceThingUploaderName}
+          fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)}
           summary={summary} printerBrand={printerBrand} raft={raft} support={support} resolution={resolution} infill={infill}
           filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
         />}

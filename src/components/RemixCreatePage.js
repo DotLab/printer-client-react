@@ -53,7 +53,7 @@ export default class RemixCreatePage extends React.Component {
     this.changeFilter = this.changeFilter.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.deleteFile = this.deleteFile.bind(this);
-    this.createThing = this.createThing.bind(this);
+    this.createRemix = this.createRemix.bind(this);
     this.checkRequiredFilled = this.checkRequiredFilled.bind(this);
   }
 
@@ -91,14 +91,16 @@ export default class RemixCreatePage extends React.Component {
     this.setState({fileName: null, fileSize: null, buffer: null, inputKey: new Date()});
   }
 
-  createThing(e) {
+  createRemix(e) {
     e.preventDefault();
-    const {buffer, fileName, fileSize, name, license, category, type, summary, printerBrand,
+    const {sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
+      buffer, fileName, fileSize, name, license, category, type, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note} = this.state;
     if (!buffer || !name || !license || !type || !summary) {
       return;
     }
-    this.app.createThing({fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
+    this.app.createRemix({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
+      fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note,
       token: this.app.state.token});
   }
@@ -260,7 +262,7 @@ export default class RemixCreatePage extends React.Component {
               </div>
             </div>
 
-            <button class={'C(white) D(b) Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t) ' + (this.checkRequiredFilled() ? 'Bgc(#0280ae.5)' : 'Bgc(#0280ae.2)') } disabled={!this.checkRequiredFilled()} onClick={this.createThing}>Upload</button>
+            <button class={'C(white) D(b) Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t) ' + (this.checkRequiredFilled() ? 'Bgc(#0280ae.5)' : 'Bgc(#0280ae.2)') } disabled={!this.checkRequiredFilled()} onClick={this.createRemix}>Upload</button>
           </form>
         </div>
       </div>

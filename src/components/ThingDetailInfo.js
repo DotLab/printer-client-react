@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 const ReactMarkdown = require('react-markdown');
 
 export default class ThingDetailInfo extends React.Component {
@@ -8,7 +9,8 @@ export default class ThingDetailInfo extends React.Component {
   }
 
   render() {
-    const {fileName, fileSize, uploadDate, summary, printerBrand, raft, support, resolution, infill,
+    const {sourceThingId, sourceThingName, sourceThingUploaderName,
+      fileName, fileSize, uploadDate, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note} = this.props;
 
     return <div>
@@ -22,6 +24,19 @@ export default class ThingDetailInfo extends React.Component {
           </div>
         </div>
       </div>
+      {sourceThingId && <div class="My(20px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">
+        <label class="Bgc(lightgray) W(100%)">
+          <span class="Mx(20px)">Source</span></label>
+        <div class="Px(20px)">
+          <div><span class="Mend(10px) Fw(b)">source Thing: </span>
+            <Link to={{pathname: `/things/${sourceThingId}/remixes`}}>{sourceThingName}</Link>
+          </div>
+          <div><span class="Mend(10px) Fw(b)">source uploader: </span>
+            <Link to={{pathname: `/users/${sourceThingUploaderName}`}}>{sourceThingUploaderName}</Link>
+          </div>
+        </div>
+      </div>}
+
       <div class="My(20px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">
         <label class="Bgc(lightgray) W(100%)">
           <span class="Mx(20px)">Summary</span></label>

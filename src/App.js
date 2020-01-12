@@ -222,6 +222,18 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async createRemix({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
+    fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
+    raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
+    console.log('here');
+    const res = await this.genericApi1('/v1/remixes/upload', {sourceThingId, sourceThingName,
+      sourceThingUploaderId, sourceThingUploaderName, fileName, fileSize, buffer, name,
+      license, category, type, summary, printerBrand, raft, support, resolution, infill,
+      filamentBrand, filamentColor, filamentMaterial, note, token});
+    this.history.push(`/things/${res.payload}/details`);
+    console.log(res);
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
