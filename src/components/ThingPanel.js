@@ -51,7 +51,10 @@ export default class ThingPanel extends React.Component {
       <a href={downloadLink} class="Mend(26px) Cur(p) C(black) Td(n):h" onClick={this.download}><i class="fas fa-download"></i>  {downloadCount}</a>
       {isLoggedIn && <Link to={{pathname: `/things/${thingId}/makes/new`}} class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>}
       {!isLoggedIn && <Link to='/login' class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-wrench"></i> MAKE {makeCount}</Link>}
-      <Link to="/remixes/new"class="Td(n):h Fz(16px) C(black) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>
+
+      {isLoggedIn && <Link to={{pathname: `/things/${thingId}/remixes/new`}} class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>}
+      {!isLoggedIn && <Link to='/login' class="Td(n):h Fz(16px) C(black) Mend(26px) Cur(p)"><i class="fas fa-compact-disc"></i> REMIX {remixCount}</Link>}
+
     </div>
     ;
   }

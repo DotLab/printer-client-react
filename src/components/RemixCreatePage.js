@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {PRINTING, ART, FASHION, GADGETS, HOBBY, HOUSEHOLD, LEARNING, MODEL, GAME} from './utils';
 import {TYPE_ART, TYPE_PRINTER, TYPE_FASHION, TYPE_GADGETS, TYPE_HOBBY, TYPE_HOUSEHOLD, TYPE_LEARNING,
   TYPE_MODEL, TYPE_GAME, ROUTE_INVALID, lookupSubType, brands} from './utils';
@@ -56,6 +57,12 @@ export default class RemixCreatePage extends React.Component {
     this.checkRequiredFilled = this.checkRequiredFilled.bind(this);
   }
 
+  async componentDidMount() {
+    const source = await this.app.getThingNames({token: this.app.state.token, thingId: this.props.match.params.thingId});
+    this.setState({sourceThingName: source.name, sourceThingUploaderId: source.uploaderId, sourceThingUploaderName: source.uploaderName});
+    console.log(this.state);
+  }
+
   changeFilter(e) {
     const category = e.target.value;
     const subTypes = lookupSubType(category);
@@ -102,7 +109,7 @@ export default class RemixCreatePage extends React.Component {
   }
 
   render() {
-    const {subTypes, printingSettings, fileName, preview} = this.state;
+    const {subTypes, printingSettings, fileName, preview, sourceThingId, sourceThingName, sourceThingUploaderName} = this.state;
 
     return <div class="Py(30px) My(10px)">
       <div class="W(70%) Mx(a)">
@@ -120,6 +127,10 @@ export default class RemixCreatePage extends React.Component {
             <span class="Fl(end) Cur(p)" onClick={this.deleteFile}><i class="fas fa-times"></i></span>
           </div>}
           <form class="Px(12px) Bdrs(4px) My(30px) W(100%)">
+            <span class="Fz(14px) Fw(b)">Source</span>
+            <div class="W(84%) H(40px) Fz(14px)">
+              <span class="Fz(14px) Fw(b)"><Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link></span> by {sourceThingUploaderName}
+            </div>
             <div class="W(100%)">
               <span class="Fz(14px) Fw(b)">Thing name *</span>
               <div><input class={INPUT_STYLE} name="name" onChange={this.onChange} required/></div>

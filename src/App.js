@@ -12,6 +12,7 @@ import MakeDetailPage from './components/MakeDetailPage';
 import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
+import RemixCreatePage from './components/RemixCreatePage';
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './components/utils';
 
 import {Switch} from 'react-router-dom';
@@ -236,6 +237,7 @@ export default class App extends React.Component {
         <PropsRoute exact path="/login" component={LoginPage} app={this}/>
         <PropsRoute exact path="/password-reset" component={PasswordResetPage} app={this}/>
         <PropsRoute exact path="/things/:thingId/makes/new" component={MakeCreatePage} app={this}/>
+        <PropsRoute exact path="/things/:thingId/remixes/new" component={RemixCreatePage} app={this}/>
         <PropsRoute exact path="/makes/:makeId" component={MakeDetailPage} app={this}/>
         <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>

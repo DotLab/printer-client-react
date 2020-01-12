@@ -147,7 +147,6 @@ export default class ThingDetailPage extends React.Component {
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
       remixCount, comments, makes, liked, bookmarked, downloadLink, _id, remixes} = this.state;
     const {tab} = this.props;
-    console.log(makeCount);
 
     return <div>
       <div class="W(70%) Mx(a)">
