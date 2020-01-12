@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import ThingDetailInfo from './ThingDetailInfo';
 import ThingPanel from './ThingPanel';
 import ThingDetailComment from './ThingDetailComment';
@@ -15,7 +16,6 @@ export default class ThingDetailPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-      tab: MAKES,
       uploaderName: null,
       fileName: null,
       fileSize: null,
@@ -134,10 +134,11 @@ export default class ThingDetailPage extends React.Component {
   }
 
   render() {
-    const {tab, _id, uploaderName, fileName, fileSize, name, license, summary, printerBrand,
+    const {uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
-      remixCount, comments, makes, liked, bookmarked, downloadLink} = this.state;
+      remixCount, comments, makes, liked, bookmarked, downloadLink, _id} = this.state;
+    const {tab} = this.props;
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -156,21 +157,21 @@ export default class ThingDetailPage extends React.Component {
             thingId={_id} isLoggedIn={this.app.state.token}/>
         </div>
         <div class="H(60px) My(20px) Lh(60px)">
-          <span onClick={() => this.setState({tab: DETAIL})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          <Link to={{pathname: `/things/${_id}/details`}} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black) ' + (tab === DETAIL ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-info"></i> details
-          </span>
-          <span onClick={() => this.setState({tab: COMMENTS})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === COMMENTS ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          </Link>
+          <Link to={{pathname: `/things/${_id}/comments`}} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === COMMENTS ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-comments"></i> comments
-          </span>
-          <span onClick={() => this.setState({tab: MAKES})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === MAKES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          </Link>
+          <Link to={{pathname: `/things/${_id}/makes`}} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === MAKES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-wrench"></i> makes
-          </span>
-          <span onClick={() => this.setState({tab: REMIXES})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === REMIXES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          </Link>
+          <Link to={{pathname: `/things/${_id}/remixes`}} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === REMIXES ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-compact-disc"></i> remixes
-          </span>
-          <span onClick={() => this.setState({tab: LICENSE})} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === LICENSE ? 'C(black) Bdbs(s)' : 'C(gray)')}>
+          </Link>
+          <Link to={{pathname: `/things/${_id}/license`}} class={'Td(n):h C(black):h Px(20px) Py(10px) Bdbs(s):h Bdbc(black):h ' + (tab === LICENSE ? 'C(black) Bdbs(s)' : 'C(gray)')}>
             <i class="fas fa-balance-scale"></i> View license
-          </span>
+          </Link>
         </div>
 
         {tab === DETAIL && <ThingDetailInfo fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)}

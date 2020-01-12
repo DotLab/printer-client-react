@@ -12,7 +12,7 @@ import MakeDetailPage from './components/MakeDetailPage';
 import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
-
+import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './components/utils';
 
 import {Switch} from 'react-router-dom';
 
@@ -221,7 +221,11 @@ export default class App extends React.Component {
       <PropsRoute path="/" component={Navbar} app={this}/>
       <Switch>
         <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
-        <PropsRoute exact path="/things/:thingId" component={ThingDetailPage} app={this}/>
+        <PropsRoute exact path="/things/:thingId/details" component={ThingDetailPage} app={this} tab={DETAIL}/>
+        <PropsRoute exact path="/things/:thingId/comments" component={ThingDetailPage} app={this} tab={COMMENTS}/>
+        <PropsRoute exact path="/things/:thingId/makes" component={ThingDetailPage} app={this} tab={MAKES}/>
+        <PropsRoute exact path="/things/:thingId/remixes" component={ThingDetailPage} app={this} tab={REMIXES}/>
+        <PropsRoute exact path="/things/:thingId/license" component={ThingDetailPage} app={this} tab={LICENSE}/>
         <PropsRoute exact path="/things" component={ThingListingPage} app={this}/>
         <PropsRoute exact path="/register" component={RegisterPage} app={this}/>
         <PropsRoute exact path="/login" component={LoginPage} app={this}/>
