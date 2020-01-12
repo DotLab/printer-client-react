@@ -105,7 +105,7 @@ export default class MakeCreatePage extends React.Component {
             <div>
               <span class="Fz(14px) Fw(b)">Source</span>
               <div class="W(84%) H(40px) Fz(14px)">
-                <span class="Fz(14px) Fw(b)"><Link to={{pathname: `/things/${sourceThingId}`}}>{sourceThingName}</Link></span> by {sourceThingUploaderName}
+                <span class="Fz(14px) Fw(b)"><Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link></span> by {sourceThingUploaderName}
               </div>
               <span class="Fz(14px) Fw(b)">Description</span>
               <textarea class="D(b) Bdrs(4px) W(100%) H(180px) Px(4px) Py(4px)" placeholder="Write a description..." name="description"
