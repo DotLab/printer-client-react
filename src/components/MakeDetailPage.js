@@ -16,6 +16,7 @@ export default class Make extends React.Component {
 
       _id: this.props.match.params.makeId,
       uploaderName: '',
+      sourceThingId: null,
       sourceThingName: '',
       sourceThingUploaderName: '',
       description: '',
@@ -51,9 +52,7 @@ export default class Make extends React.Component {
     }
 
     const comments = await this.app.getMakeCommentList({makeId: this.props.match.params.makeId, token: this.app.state.token, limit: LIMIT});
-    console.log(comments);
     this.setState({comments});
-    console.log(this.state);
   }
 
   async makeComment() {
@@ -70,15 +69,12 @@ export default class Make extends React.Component {
 
   async like() {
     await this.app.likeMake({token: this.app.state.token, makeId: this.state._id});
-    console.log('like api');
     const likeCount = await this.app.makeLikeCount({makeId: this.state._id});
-    console.log(likeCount);
     this.setState({likeCount, liked: true});
   }
 
   async unlike() {
     await this.app.unlikeMake({token: this.app.state.token, makeId: this.state._id});
-    console.log('unliking');
     const likeCount = await this.app.makeLikeCount({makeId: this.state._id});
     this.setState({likeCount, liked: false});
   }
@@ -93,7 +89,7 @@ export default class Make extends React.Component {
 
   render() {
     const {focus, comment, comments, printerBrand, raft, support, resolution, infill,
-      filamentBrand, filamentColor, filamentMaterial, note, sourceThingName,
+      filamentBrand, filamentColor, filamentMaterial, note, sourceThingId, sourceThingName,
       sourceThingUploaderName, uploaderName, uploadDate, likeCount, liked} = this.state;
 
     return <div>
@@ -107,7 +103,7 @@ export default class Make extends React.Component {
             </div>
           </div>
           {!liked && <span class="Mend(26px) Cur(p)" onClick={this.like}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
-          {liked && <span class="Mend(26px) Cur(p) C(pink)" onClick={this.unlike}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
+          {liked && <span class="Mend(26px) Cur(p) C(#0280ae)" onClick={this.unlike}><i class="fas fa-thumbs-up"></i> {likeCount}</span>}
         </div>
 
         <div class="Py(30px) D(f) Jc(sa) My(10px)">
@@ -116,8 +112,8 @@ export default class Make extends React.Component {
             <div class="D(f)">
               <span>Source:</span>
               <div class="Mx(10px)">
-                <div><Link to="/things/detail">{sourceThingName}</Link></div>
-                <div>by <Link to="/things/detail">{sourceThingUploaderName}</Link></div>
+                <div><Link to={{pathname: `/things/${sourceThingId}/`}}>{sourceThingName}</Link></div>
+                <div>by <Link to={{pathname: `/users/${sourceThingUploaderName}/`}}>{sourceThingUploaderName}</Link></div>
               </div>
             </div>
             <div class="My(20px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">

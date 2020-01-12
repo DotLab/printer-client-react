@@ -166,8 +166,7 @@ export default class App extends React.Component {
   }
 
   async likeMake({token, makeId}) {
-    const res = await this.genericApi1('/v1/makes/like', {token, makeId});
-    console.log('end of likemake ', res);
+    await this.genericApi1('/v1/makes/like', {token, makeId});
   }
 
   async unlikeMake({token, makeId}) {
@@ -176,7 +175,6 @@ export default class App extends React.Component {
 
   async makeLikeCount({makeId}) {
     const res = await this.genericApi1('/v1/makes/likecount', {makeId});
-    console.log('makeLikeCount', res);
     return res.payload;
   }
 
@@ -209,13 +207,12 @@ export default class App extends React.Component {
     const res = await this.genericApi1('/v1/makes/upload', {sourceThingId, sourceThingName, sourceThingUploaderId,
       sourceThingUploaderName, buffer, fileName, fileSize, description, printerBrand, raft, support,
       resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token});
-    console.log(res);
+
     this.history.push(`/makes/${res.payload}`);
   }
 
   async thingMakeList({thingId, limit}) {
     const res = await this.genericApi1('/v1/things/make/list', {thingId, limit});
-    console.log(res);
     return res.payload;
   }
 
