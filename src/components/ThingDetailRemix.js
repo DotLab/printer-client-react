@@ -7,13 +7,16 @@ export default class ThingDetailRemix extends React.Component {
     this.app = props.app;
   }
 
+  async componentDidMount() {
+    await this.props.thingRemixList();
+  }
+
   render() {
+    const {remixes} = this.props;
+
     return <div class="Py(30px) My(10px)">
-      <MakeOverview/>
-      <MakeOverview/>
-      <MakeOverview/>
-      <MakeOverview/>
-      <MakeOverview/>
+      {remixes.map((remix) => <MakeOverview key={remix._id} id={remix._id} uploaderName={remix.uploaderName}
+      />)}
     </div>;
   }
 }

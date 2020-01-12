@@ -22,7 +22,7 @@ export default class ThingOverview extends React.Component {
 
         <img class="W(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/>
       </div>
-      <Link to={{pathname: `/things/${this.props.id}/`}}>
+      <Link to={{pathname: `/things/${this.props.id}/details`}}>
         <figcaption class="W(100%) Pos(a) D(f) Fxd(c) Jc(c) H(83%) B(0) Ai(c) P(8px) C(white) Op(0) Op(1):h Bgc(#000000.4):h">
           <div><i class="fas fa-thumbs-up"></i> {likeCount}</div>
         </figcaption>

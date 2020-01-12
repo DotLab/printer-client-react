@@ -216,6 +216,11 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async thingRemixList({thingId, limit}) {
+    const res = await this.genericApi1('/v1/things/remix/list', {thingId, limit});
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>

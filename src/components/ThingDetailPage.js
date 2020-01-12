@@ -45,6 +45,7 @@ export default class ThingDetailPage extends React.Component {
       remixCount: null,
       comments: [],
       makes: [],
+      remixes: [],
       liked: false,
       bookmarked: false,
       downloadLink: null,
@@ -60,6 +61,7 @@ export default class ThingDetailPage extends React.Component {
     this.unBookmark = this.unBookmark.bind(this);
     this.download = this.download.bind(this);
     this.thingMakeList = this.thingMakeList.bind(this);
+    this.thingRemixList = this.thingRemixList.bind(this);
   }
 
   async componentDidMount() {
@@ -133,12 +135,19 @@ export default class ThingDetailPage extends React.Component {
     this.setState({makes});
   }
 
+  async thingRemixList() {
+    const remixes = await this.app.thingRemixList({thingId: this.props.match.params.thingId, limit: LIMIT});
+    console.log(remixes);
+    this.setState({remixes});
+  }
+
   render() {
     const {uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
-      remixCount, comments, makes, liked, bookmarked, downloadLink, _id} = this.state;
+      remixCount, comments, makes, liked, bookmarked, downloadLink, _id, remixes} = this.state;
     const {tab} = this.props;
+    console.log(makeCount);
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -181,7 +190,7 @@ export default class ThingDetailPage extends React.Component {
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
         {tab === MAKES && <ThingDetailMake thingMakeList={this.thingMakeList} makes={makes} thingName={name}/>}
-        {tab === REMIXES && <ThingDetailRemix/>}
+        {tab === REMIXES && <ThingDetailRemix thingRemixList={this.thingRemixList} remixes={remixes}/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 
       </div>
