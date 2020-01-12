@@ -6,7 +6,7 @@ import {onChange} from '../utils';
 const INPUT_STYLE = 'W(84%) H(40px) Fz(14px) Bdc(t) O(n) Bdbs(s):h Bdbc(black):f Bdbc(lightgray) Mb(30px)';
 const MAX_SIZE = 1048576;
 
-export default class ThingCreatePage extends React.Component {
+export default class MakeCreatePage extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import Comment from './Comment';
 import {onChange, formatDate, LIMIT} from '../utils';
 
-export default class Make extends React.Component {
+export default class MakeDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
@@ -112,7 +112,7 @@ export default class Make extends React.Component {
             <div class="D(f)">
               <span>Source:</span>
               <div class="Mx(10px)">
-                <div><Link to={{pathname: `/things/${sourceThingId}/`}}>{sourceThingName}</Link></div>
+                <div><Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link></div>
                 <div>by <Link to={{pathname: `/users/${sourceThingUploaderName}/`}}>{sourceThingUploaderName}</Link></div>
               </div>
             </div>
