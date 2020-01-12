@@ -80,6 +80,22 @@ export default class ThingDetailPage extends React.Component {
     this.setState({liked, bookmarked, downloadLink});
   }
 
+  async componentWillReceiveProps(newprops) {
+    const thing = await this.app.thingDetail({thingId: newprops.match.params.thingId});
+    this.setState({...thing, sourceThingId: thing.sourceThingId || '',
+      sourceThingName: thing.sourceThingName || '',
+      sourceThingUploaderId: thing.sourceThingUploaderId || '',
+      sourceThingUploaderName: thing.sourceThingUploaderName || ''});
+    let liked = false;
+    let bookmarked = false;
+    if (this.app.state.token) {
+      liked = await this.app.thingLikeStatus({thingId: this.state._id, token: this.app.state.token});
+      bookmarked = await this.app.thingBookmarkStatus({thingId: this.state._id, token: this.app.state.token});
+    }
+    const downloadLink = await this.app.getSignedUrl({thingId: this.state._id});
+    this.setState({liked, bookmarked, downloadLink});
+  }
+
   async getThingComments() {
     const comments = await this.app.getThingCommentList({thingId: this.props.match.params.thingId, token: this.app.state.token, limit: LIMIT});
     this.setState({comments});

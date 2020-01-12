@@ -8,7 +8,7 @@ export default class RemixOverview extends React.Component {
   }
 
   render() {
-    const {uploaderName, name} = this.props;
+    const {uploaderName, name, id} = this.props;
 
     return <figure class="Pos(r) D(ib) Maw(320px) M(20px)">
       <div class="D(f)">
@@ -21,7 +21,7 @@ export default class RemixOverview extends React.Component {
       <div>
         <img class="W(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/>
       </div>
-      <Link to={{pathname: `/makes/${this.props.id}`}}>
+      <Link to={{pathname: `/things/${id}/details`}}>
         <figcaption class="W(100%) Pos(a) D(f) Fxd(c) Jc(c) H(83%) B(0) Ai(c) P(8px) C(white)">
         </figcaption>
       </Link>
