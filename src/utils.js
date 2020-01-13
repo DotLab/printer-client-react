@@ -136,7 +136,7 @@ export const QUERY_ASC = 'asc';
 export const QUERY_DESC = 'desc';
 
 export const FILTER_ALL = 'All';
-export const SORT_DATE = 'date';
+export const SORT_DATE = 'newest';
 export const SORT_POPULAR = 'popular';
 export const SORT_MAKES = 'makes';
 export const SORT_REMIXES = 'remixes';

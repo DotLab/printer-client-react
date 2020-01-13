@@ -34,7 +34,7 @@ export default class Navbar extends React.Component {
         this.props.history.push(this.app.state.user.userName + '/overview');
       } else {
         this.app.userLogOut();
-        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+        this.app.userLogin({email: 'alice@gmail.com', password: '123'});
       }
     } else if (e.target.value === ROUTE_BOOKMARK) {
       if (this.app.state.user) {
@@ -42,7 +42,7 @@ export default class Navbar extends React.Component {
         this.props.history.push(this.app.state.user.userName + '/bookmarks');
       } else {
         this.app.userLogOut();
-        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+        this.app.userLogin({email: 'alice@gmail.com', password: '123'});
       }
     } else if (e.target.value === ROUTE_MAKE) {
       if (this.app.state.user) {
@@ -50,7 +50,7 @@ export default class Navbar extends React.Component {
         this.props.history.push(this.app.state.user.userName + '/makes');
       } else {
         this.app.userLogOut();
-        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+        this.app.userLogin({email: 'alice@gmail.com', password: '123'});
       }
     } else if (e.target.value === ROUTE_THING) {
       if (this.app.state.user) {
@@ -58,10 +58,10 @@ export default class Navbar extends React.Component {
         this.props.history.push(this.app.state.user.userName + '/things');
       } else {
         this.app.userLogOut();
-        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+        this.app.userLogin({email: 'alice@gmail.com', password: '123'});
       }
     } else if (e.target.value === ROUTE_SETTINGS) {
-      this.props.history.push('/settings');
+      this.props.history.push('/settings/profile');
     } else if (e.target.value === ROUTE_LOGOUT) {
       this.app.userLogOut();
     }
@@ -85,7 +85,6 @@ export default class Navbar extends React.Component {
           <span class="Lh(60px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)" onMouseOver={() => this.setState({exploreHovering: true})}>Explore <i class="fas fa-chevron-down"></i>
             <div class={'P(10px) Pos(a) Bgc(black) W(200px) ' + (exploreHovering ? 'D(b)' : 'D(n)')} onMouseOut={() => this.setState({exploreHovering: false})}>
               <Link to="/things" class="D(b) C(white)">Thing</Link>
-              <Link to="/things" class="D(b) C(white)">Collections</Link>
             </div>
           </span>
         </div>

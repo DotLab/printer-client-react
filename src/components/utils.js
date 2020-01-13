@@ -28,6 +28,10 @@ export const OVERVIEW = 'overview';
 export const THINGS = 'things';
 export const BOOKMARKS = 'bookmarks';
 
+export const PROFILE = 'profile';
+export const ACCOUNT = 'account';
+export const SECURITY = 'security';
+
 const PRINTER_ACCESSORIES = '3D printer accessories';
 const PRINTER = '3D printers';
 const PRINTER_EXTRUDERS = '3D printer extruders';

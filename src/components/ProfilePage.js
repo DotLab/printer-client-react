@@ -44,7 +44,7 @@ export default class ProfilePage extends React.Component {
           <div class="My(20px)">
             <span class="Fw(b) Fz(18px)">{displayName}</span>
             <div class="Fz(16px)">{userName}</div>
-            <div class="My(20px)">{bio} hi, this is the bio</div>
+            <div class="My(20px)">{bio}</div>
 
           </div>
         </div>

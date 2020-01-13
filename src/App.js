@@ -13,7 +13,8 @@ import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
 import RemixCreatePage from './components/RemixCreatePage';
-import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE, THINGS, OVERVIEW, BOOKMARKS} from './components/utils';
+import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE, THINGS, OVERVIEW,
+  BOOKMARKS, PROFILE, ACCOUNT, SECURITY} from './components/utils';
 
 import {Switch} from 'react-router-dom';
 
@@ -47,7 +48,7 @@ export default class App extends React.Component {
         } else {
           reject(response.data);
           this.userLogOut();
-          this.userLogin({email: 'kai@gmail.com', password: '123'});
+          this.userLogin({email: 'alice@gmail.com', password: '123'});
         }
       }).catch((err) => {
         reject(err);
@@ -81,16 +82,17 @@ export default class App extends React.Component {
     this.history.push('/login');
   }
 
-  async userChangePassword({currentPassword, newPassword, token}) {
-    await this.genericApi1('/v1/users/settings/password/change', {token, currentPassword, newPassword});
+  async userChangePassword({oldPassword, newPassword, token}) {
+    await this.genericApi1('/v1/users/settings/changepassword', {token, oldPassword, newPassword});
     this.history.push('/login');
   }
 
   async createThing({fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
     raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
-    await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
+    const res = await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
       license, category, type, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, token});
+    this.history.push(`/things/${res.payload}/details`);
   }
 
   async thingList({category, type, sort, order, limit, skip, search}) {
@@ -260,6 +262,22 @@ export default class App extends React.Component {
     return res.payload;
   }
 
+  async updateProfile({displayName, bio, token}) {
+    const res = await this.genericApi1('/v1/users/profile/update', {displayName, bio, token});
+    console.log(res);
+  }
+
+  async userInfo({token}) {
+    const res = await this.genericApi1('/v1/users/info', {token});
+    return res.payload;
+  }
+
+  async deleteAccount({token}) {
+    await this.genericApi1('/v1/users/delete-account', {token});
+    this.userLogOut();
+    this.history.push('/');
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
@@ -281,7 +299,9 @@ export default class App extends React.Component {
         <PropsRoute exact path="/:username/things" component={ProfilePage} app={this} tab={THINGS}/>
         <PropsRoute exact path="/:username/makes" component={ProfilePage} app={this} tab={MAKES}/>
         <PropsRoute exact path="/:username/bookmarks" component={ProfilePage} app={this} tab={BOOKMARKS}/>
-        <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
+        <PropsRoute exact path="/settings/profile" component={SettingPage} app={this} tab={PROFILE}/>
+        <PropsRoute exact path="/settings/account" component={SettingPage} app={this} tab={ACCOUNT}/>
+        <PropsRoute exact path="/settings/security" component={SettingPage} app={this} tab={SECURITY}/>
       </Switch>
     </div>;
   }
