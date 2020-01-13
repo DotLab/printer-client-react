@@ -115,6 +115,8 @@ export default class ThingDetailPage extends React.Component {
 
   async checkLogin() {
     if (!this.app.state.token) {
+      console.log(this.props.location.pathname);
+      this.app.saveUrl(this.props.location.pathname);
       this.props.history.push('/login');
     }
   }

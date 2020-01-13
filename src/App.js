@@ -30,6 +30,7 @@ export default class App extends React.Component {
       user: null,
       token: localStorage.getItem('token'),
       error: null,
+      currentUrl: null,
     };
   }
 
@@ -63,7 +64,17 @@ export default class App extends React.Component {
     localStorage.setItem('token', token);
     this.setState({token});
     this.userName({token});
-    this.history.push('/');
+    if (this.state.currentUrl) {
+      this.history.push(this.state.currentUrl);
+    } else {
+      this.history.push('/');
+      this.setState({currentUrl: null});
+    }
+  }
+
+  saveUrl(currentUrl) {
+    console.log(currentUrl);
+    this.setState({currentUrl});
   }
 
   async userName({token}) {
