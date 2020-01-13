@@ -32,7 +32,7 @@ export default class ThingDetailInfo extends React.Component {
             <Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link>
           </div>
           <div><span class="Mend(10px) Fw(b)">source uploader: </span>
-            <Link to={{pathname: `/users/${sourceThingUploaderName}`}}>{sourceThingUploaderName}</Link>
+            <Link to={{pathname: `/${sourceThingUploaderName}`}}>{sourceThingUploaderName}</Link>
           </div>
         </div>
       </div>}

@@ -29,13 +29,37 @@ export default class Navbar extends React.Component {
     } else if (e.target.value === ROUTE_NEW_CUSTOMIZABLE) {
       this.props.history.push('/things/customizable/new');
     } else if (e.target.value === ROUTE_PROFILE) {
-      this.props.history.push('/username');
+      if (this.app.state.user) {
+        this.props.history.push('/');
+        this.props.history.push(this.app.state.user.userName + '/overview');
+      } else {
+        this.app.userLogOut();
+        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+      }
     } else if (e.target.value === ROUTE_BOOKMARK) {
-      this.props.history.push('/me/bookmark');
+      if (this.app.state.user) {
+        this.props.history.push('/');
+        this.props.history.push(this.app.state.user.userName + '/bookmarks');
+      } else {
+        this.app.userLogOut();
+        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+      }
     } else if (e.target.value === ROUTE_MAKE) {
-      this.props.history.push('/me/make');
+      if (this.app.state.user) {
+        this.props.history.push('/');
+        this.props.history.push(this.app.state.user.userName + '/makes');
+      } else {
+        this.app.userLogOut();
+        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+      }
     } else if (e.target.value === ROUTE_THING) {
-      this.props.history.push('/me/thing');
+      if (this.app.state.user) {
+        this.props.history.push('/');
+        this.props.history.push(this.app.state.user.userName + '/things');
+      } else {
+        this.app.userLogOut();
+        this.app.userLogin({email: 'kai@gmail.com', password: '123'});
+      }
     } else if (e.target.value === ROUTE_SETTINGS) {
       this.props.history.push('/settings');
     } else if (e.target.value === ROUTE_LOGOUT) {
@@ -80,7 +104,7 @@ export default class Navbar extends React.Component {
           {isLoggedin && <span>
             <span class="C(white) Cur(p) Mend(20px) Pos(r) D(ib) Mstart(20px) Fz(16px)">
               <i class="fas fa-plus"></i> <i class="fas fa-sort-down"></i>
-              <select class="Pos(a) D(b) W(50px) H(50px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
+              <select class="Pos(a) D(b) W(50px) H(34px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
                 <option class="D(n)" value={ROUTE_INVALID} disabled>---</option>
                 <option value={ROUTE_NEW_THING}>New thing</option>
                 <option value={ROUTE_NEW_CUSTOMIZABLE}>New customizable</option>
@@ -89,7 +113,7 @@ export default class Navbar extends React.Component {
 
             <span class="C(white) Cur(p) Pos(r) D(ib) Fz(16px)">
               <i class="fas fa-user"></i> <i class="fas fa-sort-down"></i>
-              <select class="Pos(a) D(b) W(50px) H(50px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
+              <select class="Pos(a) D(b) W(50px) H(34px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
                 <option class="D(n)" value={ROUTE_INVALID} disabled>---</option>
                 <option value={ROUTE_PROFILE}>Your profile</option>
                 <option value={ROUTE_THING}>Your things</option>

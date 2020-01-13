@@ -13,7 +13,7 @@ export default class ThingDetailLicense extends React.Component {
     return <div class="Py(30px) My(10px)">
       <Link to="/things/detail">{name}</Link>
       <div>
-      by <Link to="/user">{uploaderName}</Link> is licensed under the <Link to = "/sth">{license}</Link> license
+      by <Link to={{pathname: `/${uploaderName}`}}>{uploaderName}</Link> is licensed under the <Link to = "/sth">{license}</Link> license
       </div>
     </div>;
   }

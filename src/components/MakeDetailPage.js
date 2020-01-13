@@ -113,7 +113,7 @@ export default class MakeDetailPage extends React.Component {
               <span>Source:</span>
               <div class="Mx(10px)">
                 <div><Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link></div>
-                <div>by <Link to={{pathname: `/users/${sourceThingUploaderName}/`}}>{sourceThingUploaderName}</Link></div>
+                <div>by <Link to={{pathname: `/${sourceThingUploaderName}`}}>{sourceThingUploaderName}</Link></div>
               </div>
             </div>
             <div class="My(20px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">

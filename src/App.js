@@ -13,7 +13,7 @@ import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
 import RemixCreatePage from './components/RemixCreatePage';
-import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE} from './components/utils';
+import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE, THINGS, OVERVIEW, BOOKMARKS} from './components/utils';
 
 import {Switch} from 'react-router-dom';
 
@@ -61,7 +61,13 @@ export default class App extends React.Component {
 
     localStorage.setItem('token', token);
     this.setState({token});
+    this.userName({token});
     this.history.push('/');
+  }
+
+  async userName({token}) {
+    const res = await this.genericApi1('/v1/users/names', {token});
+    this.setState({user: res.payload});
   }
 
   async userLogOut() {
@@ -234,6 +240,26 @@ export default class App extends React.Component {
     console.log(res);
   }
 
+  async userDetail({userName}) {
+    const res = await this.genericApi1('/v1/users/detail', {userName});
+    return res.payload;
+  }
+
+  async userThings({userName}) {
+    const res = await this.genericApi1('/v1/users/things', {userName});
+    return res.payload;
+  }
+
+  async userMakes({userName}) {
+    const res = await this.genericApi1('/v1/users/makes', {userName});
+    return res.payload;
+  }
+
+  async userBookmarks({userName}) {
+    const res = await this.genericApi1('/v1/users/bookmarks', {userName});
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
@@ -251,7 +277,10 @@ export default class App extends React.Component {
         <PropsRoute exact path="/things/:thingId/makes/new" component={MakeCreatePage} app={this}/>
         <PropsRoute exact path="/things/:thingId/remixes/new" component={RemixCreatePage} app={this}/>
         <PropsRoute exact path="/makes/:makeId" component={MakeDetailPage} app={this}/>
-        <PropsRoute exact path="/username" component={ProfilePage} app={this}/>
+        <PropsRoute exact path="/:username/overview" component={ProfilePage} app={this} tab={OVERVIEW}/>
+        <PropsRoute exact path="/:username/things" component={ProfilePage} app={this} tab={THINGS}/>
+        <PropsRoute exact path="/:username/makes" component={ProfilePage} app={this} tab={MAKES}/>
+        <PropsRoute exact path="/:username/bookmarks" component={ProfilePage} app={this} tab={BOOKMARKS}/>
         <PropsRoute exact path="/settings" component={SettingPage} app={this}/>
       </Switch>
     </div>;

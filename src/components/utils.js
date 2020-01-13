@@ -24,6 +24,10 @@ export const MAKES = 'makes';
 export const REMIXES = 'remixes';
 export const LICENSE = 'license';
 
+export const OVERVIEW = 'overview';
+export const THINGS = 'things';
+export const BOOKMARKS = 'bookmarks';
+
 const PRINTER_ACCESSORIES = '3D printer accessories';
 const PRINTER = '3D printers';
 const PRINTER_EXTRUDERS = '3D printer extruders';
