@@ -13,6 +13,7 @@ import ThingCreatePage from './components/ThingCreatePage';
 import ProfilePage from './components/ProfilePage';
 import SettingPage from './components/SettingPage';
 import RemixCreatePage from './components/RemixCreatePage';
+import Homepage from './components/Homepage';
 import {DETAIL, COMMENTS, MAKES, REMIXES, LICENSE, THINGS, OVERVIEW,
   BOOKMARKS, PROFILE, ACCOUNT, SECURITY} from './components/utils';
 
@@ -289,10 +290,21 @@ export default class App extends React.Component {
     this.history.push('/');
   }
 
+  async hightLightThings({limit}) {
+    const res = await this.genericApi1('/v1/things/highlight', {limit});
+    return res.payload;
+  }
+
+  async latestMakes({limit}) {
+    const res = await this.genericApi1('/v1/makes/latest', {limit});
+    return res.payload;
+  }
+
   render() {
     return <div>
       <PropsRoute path="/" component={Navbar} app={this}/>
       <Switch>
+        <PropsRoute exact path="/" component={Homepage} app={this}/>
         <PropsRoute exact path="/things/new" component={ThingCreatePage} app={this}/>
         <PropsRoute exact path="/things/:thingId/details" component={ThingDetailPage} app={this} tab={DETAIL}/>
         <PropsRoute exact path="/things/:thingId/comments" component={ThingDetailPage} app={this} tab={COMMENTS}/>

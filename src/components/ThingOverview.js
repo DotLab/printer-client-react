@@ -10,7 +10,7 @@ export default class ThingOverview extends React.Component {
   render() {
     const {name, uploaderName, likeCount} = this.props;
 
-    return <div>
+    return <figure class="D(ib) M(20px)">
       <div class="D(f)">
         <div class="Bdrs(100%) Mend(20px) D(b)"><i class="fas fa-print"></i></div>
         <div>
@@ -28,6 +28,6 @@ export default class ThingOverview extends React.Component {
           </figcaption>
         </Link>
       </figure>
-    </div>;
+    </figure>;
   }
 }

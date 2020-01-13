@@ -164,3 +164,4 @@ export function getFullLicenseName(license) {
 }
 
 export const LIMIT = 20;
+export const HOMEPAGE_LIMIT = 3;
