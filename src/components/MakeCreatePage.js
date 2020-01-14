@@ -49,19 +49,20 @@ export default class MakeCreatePage extends React.Component {
 
   onFileChange(e) {
     if (!e.target.files[0]) return;
-
     const name = e.target.files[0].name;
     const size = e.target.files[0].size;
 
     if (size > MAX_SIZE) {
-      this.app.error('zip too large');
+      console.log('zip too large');
+      return;
     }
     const fr = new FileReader();
     fr.onload = (e) => {
-      const buffer = e.target.result;
+      const binary = e.target.result;
+      const buffer = btoa(binary);
       this.setState({buffer, fileName: name, fileSize: size});
     };
-    fr.readAsArrayBuffer(e.target.files[0]);
+    fr.readAsBinaryString(e.target.files[0]);
   }
 
   deleteFile(e) {

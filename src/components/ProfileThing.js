@@ -12,7 +12,7 @@ export default class ProfileThing extends React.Component {
 
     return <div class="Py(30px) My(10px)">
       {things.map((thing) => <ThingOverview key={thing._id} id={thing._id} uploaderName={thing.uploaderName}
-        name={thing.name} likeCount={thing.likeCount}/>)}
+        name={thing.name} likeCount={thing.likeCount} pictureUrls={thing.pictureUrls}/>)}
     </div>;
   }
 }

@@ -11,7 +11,8 @@ export default class ProfileMake extends React.Component {
     const {makes} = this.props;
 
     return <div class="Py(30px) My(10px)">
-      {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}/>)}
+      {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}
+        pictureUrl={make.pictureUrl}/>)}
     </div>;
   }
 }

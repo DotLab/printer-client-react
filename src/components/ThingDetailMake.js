@@ -12,11 +12,11 @@ export default class ThingDetailMake extends React.Component {
   }
 
   render() {
-    const {makes, thingName} = this.props;
+    const {makes} = this.props;
 
     return <div class="Py(30px) My(10px)">
       {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}
-        thingName={thingName}/>)}
+        pictureUrl={make.pictureUrl}/>)}
     </div>;
   }
 }

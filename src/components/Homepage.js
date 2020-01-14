@@ -42,10 +42,11 @@ export default class Homepage extends React.Component {
         </div>
         <div><label class="Fz(24px) Px(40px) Mt(40px)">Hightlight things </label></div>
         {things.map((thing) => <ThingOverview key={thing._id} id={thing._id} name={thing.name}
-          uploaderName={thing.uploaderName} likeCount={thing.likeCount}/>)}
+          uploaderName={thing.uploaderName} likeCount={thing.likeCount} pictureUrls={thing.pictureUrls}/>)}
 
         <div><label class="Fz(24px) Px(40px) Mt(40px)">Latest makes </label></div>
-        {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}/>)}
+        {makes.map((make) => <MakeOverview key={make._id} id={make._id} uploaderName={make.uploaderName}
+          pictureUrl={make.pictureUrl}/>)}
       </div>
     </div>;
   }

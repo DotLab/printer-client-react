@@ -214,7 +214,7 @@ export default class ThingDetailPage extends React.Component {
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
-        {tab === MAKES && <ThingDetailMake thingMakeList={this.thingMakeList} makes={makes} thingName={name}/>}
+        {tab === MAKES && <ThingDetailMake thingMakeList={this.thingMakeList} makes={makes}/>}
         {tab === REMIXES && <ThingDetailRemix thingRemixList={this.thingRemixList} remixes={remixes}/>}
         {tab === LICENSE && <ThingDetailLicense license={getFullLicenseName(license)} name={name} uploaderName={uploaderName}/>}
 
