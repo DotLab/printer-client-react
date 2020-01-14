@@ -99,10 +99,11 @@ export default class App extends React.Component {
     this.history.push('/login');
   }
 
-  async createThing({fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
+  async createThing({fileName, fileSize, buffer, pictureBuffer,
+    name, license, category, type, summary, printerBrand,
     raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
     const res = await this.genericApi1('/v1/things/upload', {fileName, fileSize, buffer, name,
-      license, category, type, summary, printerBrand, raft, support, resolution, infill,
+      pictureBuffer, license, category, type, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, token});
     this.history.push(`/things/${res.payload}/details`);
   }

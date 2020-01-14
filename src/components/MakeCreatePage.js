@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {ROUTE_INVALID, brands} from './utils';
 import {onChange} from '../utils';
 
-const INPUT_STYLE = 'W(84%) H(40px) Fz(14px) Bdc(t) O(n) Bdbs(s):h Bdbc(black):f Bdbc(lightgray) Mb(30px)';
+const INPUT_STYLE = 'W(100%) H(40px) Fz(18px) Bdc(t) O(n) Bdbc(black):f Bdbc(lightgray) Bdw(2px) Mb(30px)';
 const MAX_SIZE = 1048576;
 
 export default class MakeCreatePage extends React.Component {
@@ -88,7 +88,7 @@ export default class MakeCreatePage extends React.Component {
 
     return <div class="Py(30px) My(10px)">
       <div class="W(70%) Mx(a)">
-        <div class="Bds(s) Ta(c) H(300px)">
+        <div class="Bds(s) Ta(c) H(300px) Bdc(lightgray) Bdw(2px)">
           <div class="Py(80px)">
             <label>Upload make picture here *</label>
             <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" onChange={this.onFileChange}/>
@@ -108,21 +108,20 @@ export default class MakeCreatePage extends React.Component {
                 <span class="Fz(14px) Fw(b)"><Link to={{pathname: `/things/${sourceThingId}/details`}}>{sourceThingName}</Link></span> by {sourceThingUploaderName}
               </div>
               <span class="Fz(14px) Fw(b)">Description</span>
-              <textarea class="D(b) Bdrs(4px) W(100%) H(180px) Px(4px) Py(4px)" placeholder="Write a description..." name="description"
+              <textarea class="Bdw(2px) Bdc(lightgray) P(6px) D(b) Mt(10px) W(100%) H(180px)" placeholder="Write a description..." name="description"
                 onChange={this.onChange} value={this.state.summary}/>
             </div>
 
             <div class="Mt($m-control)">
-              <div class="Fz(22px) Bdbs(s) Bdbc(lightgray) Bdw(t)">Printing settings</div>
               <div class="Mt($m-control)">
                 <span class="Fz(14px) Fw(b)">Which brand are you using</span>
-                <select class="D(b) Fz(14px)" defaultValue={ROUTE_INVALID} name="printerBrand" onChange={this.onChange}>
+                <select class={INPUT_STYLE} defaultValue={ROUTE_INVALID} name="printerBrand" onChange={this.onChange}>
                   {brands.map((x) => <option key={x}>{x}</option>)}
                 </select>
 
-                <div class="Mt($m-control)">
+                <div>
                   <span class="Fz(14px) Fw(b)">Rafts</span>
-                  <div>
+                  <div class="Lh(40px)">
                     <input type="radio" name="raft" onChange={this.onChange} value="Yes"/> Yes
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="No"/> No
                     <input class="Mstart(20px)" type="radio" name="raft" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
@@ -131,7 +130,7 @@ export default class MakeCreatePage extends React.Component {
 
                 <div class="Mt($m-control)">
                   <span class="Fz(14px) Fw(b)">Support</span>
-                  <div>
+                  <div class="Lh(40px)">
                     <input type="radio" name="support" onChange={this.onChange} value="Yes"/> Yes
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="No"/> No
                     <input class="Mstart(20px)" type="radio" name="support" onChange={this.onChange} value="" defaultChecked/> Doesn't matter
@@ -140,13 +139,13 @@ export default class MakeCreatePage extends React.Component {
 
                 <div class="Mt($m-control)">
                   <span class="D(ib) W(46%) Mend(40px)">
-                    <span class="Fz(14px) Fw(b)">Resolution</span>
-                    <div><input type="number" class={INPUT_STYLE} name="resolution" onChange={this.onChange}/>mm</div>
+                    <span class="Fz(14px) Fw(b)">Resolution (mm)</span>
+                    <div><input type="number" class={INPUT_STYLE} name="resolution" onChange={this.onChange}/></div>
                   </span>
 
                   <span class="D(ib) W(46%)">
-                    <span class="Fz(14px) Fw(b)">Infill</span>
-                    <div><input type="number" min="0" max="100" step="1" class={INPUT_STYLE} name="infill" onChange={this.onChange}/> %</div>
+                    <span class="Fz(14px) Fw(b)">Infill (%)</span>
+                    <div><input type="number" min="0" max="100" step="1" class={INPUT_STYLE} name="infill" onChange={this.onChange}/></div>
                   </span>
                 </div>
 
@@ -170,7 +169,7 @@ export default class MakeCreatePage extends React.Component {
                 </div>
               </div>
             </div>
-            <button class={'C(white) D(b) Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t) ' + (this.state.buffer ? 'Bgc(#0280ae.5)' : 'Bgc(#0280ae.2)') } disabled={!this.state.buffer} onClick={this.createMake}>Upload make</button>
+            <button class="btn btn-outline-secondary Mt($m-control)" disabled={!this.state.buffer} onClick={this.createMake}>Upload make</button>
           </form>
         </div>
       </div>

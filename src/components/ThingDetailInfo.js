@@ -6,16 +6,39 @@ export default class ThingDetailInfo extends React.Component {
   constructor(props) {
     super(props);
     this.app = props.app;
+
+    this.state = {
+      pictureId: 0,
+    };
+
+    this.slide = this.slide.bind(this);
+  }
+
+  slide(e) {
+    e.preventDefault();
+    const num = this.props.pictureUrls.length;
+    const pictureId = (this.state.pictureId + 1) % num;
+    this.setState({pictureId: pictureId});
   }
 
   render() {
     const {sourceThingId, sourceThingName, sourceThingUploaderName,
       fileName, fileSize, uploadDate, summary, printerBrand, raft, support, resolution, infill,
-      filamentBrand, filamentColor, filamentMaterial, note} = this.props;
+      filamentBrand, filamentColor, filamentMaterial, note, pictureUrls} = this.props;
+    const {pictureId} = this.state;
+    console.log(pictureUrls);
 
     return <div>
       <div class="Py(30px) D(f) Jc(sa) My(10px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">
-        <div><img class="Maw(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/></div>
+        {(pictureUrls.length !== 0) &&
+        <div class="W(60%) D(f)">
+          <span class="Lh(400px) Mx(10px)"><i class="fas fa-chevron-circle-left"></i></span>
+          <div class="W(90%) H(400px) Bds(s)">
+            {pictureUrls.map((url, i) => <img class={'H(100%) W(100%) '+ (i === pictureId ? 'D(b)' : 'D(n)')} key={url._id} src={url} alt="sth"/>)}
+          </div>
+          <span class="Lh(400px) Mx(10px)" onClick={this.slide}><i class="fas fa-chevron-circle-right"></i></span>
+        </div>}
+
         <div class="Mx(20px)">
           <div>
             <span class="Mx(10px)"><i class="far fa-file-alt"></i> {fileName}</span>

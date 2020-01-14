@@ -13,7 +13,6 @@ export default class Navbar extends React.Component {
     this.query = queryString.parse(props.location.search);
 
     this.state = {
-      exploreHovering: false,
       q: '',
     };
 
@@ -75,17 +74,14 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const {exploreHovering, q} = this.state;
+    const {q} = this.state;
     const isLoggedin = this.app.state.token;
 
     return <div>
       <div class="Bgc(black) H(60px) Pos(st) Mb(20px) D(f) Jc(sa)" >
         <div>
-          <h1 class="Fz(26px) Lh(60px) Cur(p) Fl(start) Mstart(20px)"><Link className="C(white) C(gray):h Td(n):h" to="/">Steelblue</Link></h1>
-          <span class="Lh(60px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)" onMouseOver={() => this.setState({exploreHovering: true})}>Explore <i class="fas fa-chevron-down"></i>
-            <div class={'P(10px) Pos(a) Bgc(black) W(200px) ' + (exploreHovering ? 'D(b)' : 'D(n)')} onMouseOut={() => this.setState({exploreHovering: false})}>
-              <Link to="/things" class="D(b) C(white)">Thing</Link>
-            </div>
+          <h1 class="Fz(20px) Lh(60px) Cur(p) Fl(start) Mstart(20px)"><Link to="/" class="C(white) C(gray):h Td(n):h">Steelblue</Link></h1>
+          <span class="Fz(16px) Lh(60px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)"><Link to="/things" class="C(white) C(gray):h Td(n):h">Things</Link>
           </span>
         </div>
 
@@ -102,16 +98,17 @@ export default class Navbar extends React.Component {
             </span>}
           {isLoggedin && <span>
             <span class="C(white) Cur(p) Mend(20px) Pos(r) D(ib) Mstart(20px) Fz(16px)">
-              <i class="fas fa-plus"></i> <i class="fas fa-sort-down"></i>
+              <i class="fas fa-plus"></i> <i class="fas fa-caret-down"></i>
               <select class="Pos(a) D(b) W(50px) H(34px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
                 <option class="D(n)" value={ROUTE_INVALID} disabled>---</option>
                 <option value={ROUTE_NEW_THING}>New thing</option>
-                <option value={ROUTE_NEW_CUSTOMIZABLE}>New customizable</option>
               </select>
             </span>
 
             <span class="C(white) Cur(p) Pos(r) D(ib) Fz(16px)">
-              <i class="fas fa-user"></i> <i class="fas fa-sort-down"></i>
+              <div class="Ta(c)">
+                <i class="fas fa-user"></i> <i class="fas fa-caret-down"></i>
+              </div>
               <select class="Pos(a) D(b) W(50px) H(34px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
                 <option class="D(n)" value={ROUTE_INVALID} disabled>---</option>
                 <option value={ROUTE_PROFILE}>Your profile</option>

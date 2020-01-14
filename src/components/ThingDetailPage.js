@@ -24,6 +24,7 @@ export default class ThingDetailPage extends React.Component {
       sourceThingId: null,
       sourceThingName: null,
       sourceThingUploaderName: null,
+      pictureUrls: [],
       name: null,
       license: null,
       category: null,
@@ -69,6 +70,7 @@ export default class ThingDetailPage extends React.Component {
 
   async componentDidMount() {
     const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
+    console.log(thing);
     this.setState(thing);
     let liked = false;
     let bookmarked = false;
@@ -167,7 +169,7 @@ export default class ThingDetailPage extends React.Component {
       uploaderName, fileName, fileSize, name, license, summary, printerBrand,
       raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial,
       note, uploadDate, likeCount, bookmarkCount, downloadCount, commentCount, makeCount,
-      remixCount, comments, makes, liked, bookmarked, downloadLink, _id, remixes} = this.state;
+      remixCount, comments, makes, liked, bookmarked, downloadLink, _id, remixes, pictureUrls} = this.state;
     const {tab} = this.props;
 
     return <div>
@@ -208,7 +210,7 @@ export default class ThingDetailPage extends React.Component {
           sourceThingId={sourceThingId} sourceThingName={sourceThingName} sourceThingUploaderName={sourceThingUploaderName}
           fileName={fileName} uploadDate={formatDate(uploadDate)} fileSize={formatNumberShort(fileSize, 2)}
           summary={summary} printerBrand={printerBrand} raft={raft} support={support} resolution={resolution} infill={infill}
-          filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note}
+          filamentBrand={filamentBrand} filamentColor={filamentColor} filamentMaterial={filamentMaterial} note={note} pictureUrls={pictureUrls}
         />}
         {tab === COMMENTS && <ThingDetailComment checkLogin={this.checkLogin} comments={comments} makeComment={this.makeComment}
           deleteComment={this.deleteComment} commentCount={commentCount} getThingComments={this.getThingComments}/>}
