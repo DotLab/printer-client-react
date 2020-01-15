@@ -3,6 +3,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Comment from './Comment';
 import {onChange, formatDate, LIMIT} from '../utils';
+import NoImageAvailable from './No_Image_Available.jpg';
+
 
 export default class MakeDetailPage extends React.Component {
   constructor(props) {
@@ -15,6 +17,7 @@ export default class MakeDetailPage extends React.Component {
       comments: [],
 
       _id: this.props.match.params.makeId,
+      pictureUrl: '',
       uploaderName: '',
       sourceThingId: null,
       sourceThingName: '',
@@ -45,6 +48,7 @@ export default class MakeDetailPage extends React.Component {
 
   async componentDidMount() {
     const make = await this.app.makeDetail({makeId: this.props.match.params.makeId});
+    console.log(make);
     this.setState(make);
     if (this.app.state.token) {
       const liked = await this.app.makeLikeStatus({makeId: this.state._id, token: this.app.state.token});
@@ -90,7 +94,8 @@ export default class MakeDetailPage extends React.Component {
   render() {
     const {focus, comment, comments, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, sourceThingId, sourceThingName,
-      sourceThingUploaderName, uploaderName, uploadDate, likeCount, liked} = this.state;
+      sourceThingUploaderName, uploaderName, uploadDate, likeCount, liked, pictureUrl} = this.state;
+    const showImg = pictureUrl && (pictureUrl.length !==0);
 
     return <div>
       <div class="W(70%) Mx(a)">
@@ -107,7 +112,12 @@ export default class MakeDetailPage extends React.Component {
         </div>
 
         <div class="Py(30px) D(f) Jc(sa) My(10px)">
-          <div><img class="Maw(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/></div>
+          <div>
+            {showImg &&
+          <img class="W(100%)" src={pictureUrl} alt="sample87"/>}
+            {!showImg &&
+          <img class="W(100%)" src={NoImageAvailable} alt="sample87"/>}
+          </div>
           <div class="W(50%) Mx(20px)">
             <div class="D(f)">
               <span>Source:</span>
@@ -145,7 +155,8 @@ export default class MakeDetailPage extends React.Component {
           </div>
           <div class="My(80px) Py(20px)">
             {comments.map((comment) => <Comment key={comment._id} id={comment._id} body={comment.body}
-              commentAuthorName={comment.commentAuthorName} date={formatDate(comment.date)} deleteComment={this.deleteComment}/>)}
+              commentAuthorName={comment.commentAuthorName} date={formatDate(comment.date)} deleteComment={this.deleteComment}
+              avatarUrl={comment.commentAuthorAvatarUrl} />)}
           </div>
         </div>
       </div>

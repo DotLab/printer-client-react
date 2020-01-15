@@ -15,10 +15,10 @@ export default class Comment extends React.Component {
   }
 
   render() {
-    const {body, commentAuthorName, date} = this.props;
+    const {body, commentAuthorName, date, avatarUrl} = this.props;
     return <div>
       <div class="D(f) My(30px)">
-        <img class="W(40px) H(40px) Bdrs(100%)" src="https://66.media.tumblr.com/6c0422b6fdcdf4992fa551ebea213bae/tumblr_pdir3lVrnk1xzya40o1_250.png" alt="avatar"></img>
+        <img class="W(40px) H(40px) Bdrs(4px)" src={avatarUrl} alt="avatar"></img>
         <div class="Mx(10px) W(70%)">
           <div class="Fw(b)">{commentAuthorName}
             <span class="Fw(n) Fz(14px) Mstart(10px)">{date}</span>

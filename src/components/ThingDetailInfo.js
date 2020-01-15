@@ -33,7 +33,7 @@ export default class ThingDetailInfo extends React.Component {
         {(pictureUrls.length !== 0) &&
         <div class="W(60%) D(f)">
           <span class="Lh(400px) Mx(10px)"><i class="fas fa-chevron-circle-left"></i></span>
-          <div class="W(90%) H(400px) Bds(s)">
+          <div class="W(400px) H(400px) Bds(s)">
             {pictureUrls.map((url, i) => <img class={'H(100%) W(100%) '+ (i === pictureId ? 'D(b)' : 'D(n)')} key={url._id} src={url} alt="sth"/>)}
           </div>
           <span class="Lh(400px) Mx(10px)" onClick={this.slide}><i class="fas fa-chevron-circle-right"></i></span>

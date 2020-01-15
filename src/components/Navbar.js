@@ -14,12 +14,21 @@ export default class Navbar extends React.Component {
 
     this.state = {
       q: '',
+      avatarUrl: '',
     };
 
     this.onChange = onChange.bind(this);
     this.pushHistory = pushHistory.bind(this);
     this.changePath = this.changePath.bind(this);
     this.search = this.search.bind(this);
+  }
+
+  async componentDidMount() {
+    if (this.app.state.user) {
+      this.setState(this.app.state.user);
+    }
+    // this.setState(userInfo);
+    console.log(this.state, this.app.state.user);
   }
 
   changePath(e) {
@@ -76,17 +85,22 @@ export default class Navbar extends React.Component {
   render() {
     const {q} = this.state;
     const isLoggedin = this.app.state.token;
+    let avatarUrl = '';
+    if (this.app.state.user) {
+      avatarUrl = this.app.state.user.avatarUrl;
+    }
+    // console.log(this.app.state.user);
 
     return <div>
-      <div class="Bgc(black) H(60px) Pos(st) Mb(20px) D(f) Jc(sa)" >
+      <div class="bg-dark H(64px) Pos(st) Mb(20px) D(f) Jc(sa) shadow" >
         <div>
-          <h1 class="Fz(20px) Lh(60px) Cur(p) Fl(start) Mstart(20px)"><Link to="/" class="C(white) C(gray):h Td(n):h">Steelblue</Link></h1>
-          <span class="Fz(16px) Lh(60px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)"><Link to="/things" class="C(white) C(gray):h Td(n):h">Things</Link>
+          <h1 class="Fz(20px) Lh(64px) Cur(p) Fl(start) Mstart(20px)"><Link to="/" class="C(white) C(gray):h Td(n):h">Steelblue</Link></h1>
+          <span class="Fz(16px) Lh(64px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)"><Link to="/things" class="C(white) C(gray):h Td(n):h">Things</Link>
           </span>
         </div>
 
         <div class="Mend(20px)">
-          <span className="Lh(60px) Cur(p) C(white) Pos(r) D(ib) Mx(4px)">
+          <span className="Lh(64px) Cur(p) C(white) Pos(r) D(ib) Mx(4px)">
             <form onSubmit={this.search}>
               <input class={INPUT_STYLE} placeholder="Search Steelblue" name="q" value={q} onChange={this.onChange}/>
             </form>
@@ -107,7 +121,9 @@ export default class Navbar extends React.Component {
 
             <span class="C(white) Cur(p) Pos(r) D(ib) Fz(16px)">
               <div class="Ta(c)">
-                <i class="fas fa-user"></i> <i class="fas fa-caret-down"></i>
+                {!avatarUrl && <i class="fas fa-user Mx(4px)"></i>}
+                {avatarUrl && <img class="W(30px) H(30px) Bdrs(4px) Mx(4px)" src={avatarUrl} alt="avatar"></img>}
+                <i class="fas fa-caret-down"></i>
               </div>
               <select class="Pos(a) D(b) W(50px) H(34px) T(0) End(-15px) Op(0) Bdc(t)" onChange={this.changePath} defaultValue={ROUTE_INVALID}>
                 <option class="D(n)" value={ROUTE_INVALID} disabled>---</option>

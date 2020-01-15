@@ -29,7 +29,7 @@ export default class Homepage extends React.Component {
 
     return <div>
       <div class="Mt(40px) W(80%) Mx(a) Pos(r)">
-        <div class="W(90%) Mx(a) Ta(c) H(300px)">
+        <div class="W(96%) Mx(a) Ta(c) H(300px) shadow p-3 rounded">
           <div class="Py(80px)">
             <label class="Fz(24px)">Would you like to make something today? </label>
             {isLoggedIn && <div class="My(30px) W(70%) Mx(a)">

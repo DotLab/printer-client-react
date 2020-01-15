@@ -50,7 +50,7 @@ export default class App extends React.Component {
         } else {
           reject(response.data);
           this.userLogOut();
-          this.userLogin({email: 'alice@gmail.com', password: '123'});
+          this.userLogin({email: 'kai@gmail.com', password: '123'});
         }
       }).catch((err) => {
         reject(err);
@@ -79,7 +79,8 @@ export default class App extends React.Component {
   }
 
   async userName({token}) {
-    const res = await this.genericApi1('/v1/users/names', {token});
+    const res = await this.genericApi1('/v1/users/get-user', {token});
+    console.log(res);
     this.setState({user: res.payload});
   }
 
