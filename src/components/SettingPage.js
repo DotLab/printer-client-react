@@ -14,13 +14,14 @@ export default class SettingPage extends React.Component {
     this.app = props.app;
 
     this.state = {
-
+      avatarUrl: '',
     };
 
     this.updateProfile = this.updateProfile.bind(this);
     this.userInfo = this.userInfo.bind(this);
     this.deleteAccount = this.deleteAccount.bind(this);
     this.changePassword = this.changePassword.bind(this);
+    this.uploadAvatar = this.uploadAvatar.bind(this);
   }
 
   async updateProfile({displayName, bio}) {
@@ -28,7 +29,9 @@ export default class SettingPage extends React.Component {
   }
 
   async userInfo() {
-    return await this.app.userInfo({token: this.app.state.token});
+    const userInfo = await this.app.userInfo({token: this.app.state.token});
+    this.setState(userInfo);
+    return userInfo;
   }
 
   async deleteAccount() {
@@ -39,8 +42,14 @@ export default class SettingPage extends React.Component {
     await this.app.userChangePassword({token: this.app.state.token, oldPassword, newPassword});
   }
 
+  async uploadAvatar({buffer}) {
+    const avatarUrl = await this.app.uploadAvatar({token: this.app.state.token, buffer});
+    this.setState({avatarUrl});
+  }
+
   render() {
     const {tab} = this.props;
+    const {avatarUrl} = this.state;
 
     return <div class="W(80%) Mx(a)">
       <div class="D(f) Jc(c)">
@@ -51,7 +60,8 @@ export default class SettingPage extends React.Component {
           <div class="My(4px)"><Link to="/settings/security" class={'Cur(p) Fz(16px) Td(n):h ' + (tab === SECURITY ? 'C(black) Fw(b)' : 'C(steelblue) Fw(n)')}>{SECURITY}<span class="Fl(end)"></span></Link></div>
         </div>
         <div class="W(70%) Py(10px) Mstart(20px)">
-          {tab === PROFILE && <SettingProfile userInfo={this.userInfo} updateProfile={this.updateProfile}/>}
+          {tab === PROFILE && <SettingProfile userInfo={this.userInfo} updateProfile={this.updateProfile}
+            uploadAvatar={this.uploadAvatar} avatarUrl={avatarUrl}/>}
           {tab === ACCOUNT && <SettingAccount deleteAccount={this.deleteAccount}/>}
           {tab === SECURITY && <SettingSecurity changePassword={this.changePassword}/>}
         </div>

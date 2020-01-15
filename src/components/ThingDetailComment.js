@@ -56,7 +56,8 @@ export default class ThingDetailComment extends React.Component {
 
       <div class="My(80px) Py(20px)">
         {comments.map((comment) => <Comment key={comment._id} id={comment._id} body={comment.body}
-          commentAuthorName={comment.commentAuthorName} date={formatDate(comment.date)} deleteComment={this.deleteComment}/>)}
+          commentAuthorName={comment.commentAuthorName} date={formatDate(comment.date)} deleteComment={this.deleteComment}
+          avatarUrl={comment.commentAuthorAvatarUrl}/>)}
       </div>
     </div>;
   }
