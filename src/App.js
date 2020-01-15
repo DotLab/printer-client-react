@@ -80,7 +80,6 @@ export default class App extends React.Component {
 
   async userName({token}) {
     const res = await this.genericApi1('/v1/users/get-user', {token});
-    console.log(res);
     this.setState({user: res.payload});
   }
 
@@ -299,6 +298,18 @@ export default class App extends React.Component {
 
   async latestMakes({limit}) {
     const res = await this.genericApi1('/v1/makes/latest', {limit});
+    return res.payload;
+  }
+
+  async uploadAvatar({token, buffer}) {
+    const res = await this.genericApi1('/v1/users/avatar', {token, buffer});
+    console.log(res);
+    return res.payload;
+  }
+
+  async getAvatarUrl({userName}) {
+    const res = await this.genericApi1('/v1/users/get-avatar', {userName});
+    console.log(res);
     return res.payload;
   }
 
