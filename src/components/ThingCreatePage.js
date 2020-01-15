@@ -237,7 +237,6 @@ export default class ThingCreatePage extends React.Component {
               <div class="Bds(s) Bdw(2px) Bdc(lightgray) Px(10px) Py(10px) Mt(10px) W(100%)">
                 <ReactMarkdown source={this.state.summary}/>
               </div>}
-
           </div>
 
           <div class="Mt($m-control)">

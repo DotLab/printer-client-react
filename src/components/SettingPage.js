@@ -24,8 +24,8 @@ export default class SettingPage extends React.Component {
     this.uploadAvatar = this.uploadAvatar.bind(this);
   }
 
-  async updateProfile({displayName, bio}) {
-    await this.app.updateProfile({displayName, bio, token: this.app.state.token});
+  async updateProfile({displayName, bio, overview}) {
+    await this.app.updateProfile({displayName, bio, overview, token: this.app.state.token});
   }
 
   async userInfo() {

@@ -275,8 +275,8 @@ export default class App extends React.Component {
     return res.payload;
   }
 
-  async updateProfile({displayName, bio, token}) {
-    const res = await this.genericApi1('/v1/users/profile/update', {displayName, bio, token});
+  async updateProfile({displayName, bio, overview, token}) {
+    const res = await this.genericApi1('/v1/users/profile/update', {displayName, bio, overview, token});
     console.log(res);
   }
 

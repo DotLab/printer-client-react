@@ -4,7 +4,8 @@ import ProfileThing from './ProfileThing';
 import ProfileMake from './ProfileMake';
 import ProfileBookmark from './ProfileBookmark';
 import {OVERVIEW, THINGS, MAKES, BOOKMARKS} from './utils';
-
+import avatar from './avatar.jpg';
+const ReactMarkdown = require('react-markdown');
 
 export default class ProfilePage extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ export default class ProfilePage extends React.Component {
       userName: this.props.match.params.username,
       displayName: null,
       bio: '',
+      overview: '',
+      avatarUrl: '',
       things: [],
       makes: [],
       bookmarks: [],
@@ -31,15 +34,21 @@ export default class ProfilePage extends React.Component {
   }
 
   render() {
-    const {userName, displayName, bio, things, makes, bookmarks} = this.state;
+    const {userName, displayName, bio, avatarUrl, things, makes, bookmarks} = this.state;
     const {tab} = this.props;
+    const showImg = avatarUrl && (avatarUrl.length !==0);
+
     const isOwner = this.app.state.user && (this.app.state.user.userName === userName);
 
     return <div class="W(70%) Mx(a)">
       <div class="D(f) Jc(c)">
         <div>
           <div class="W(200px) H(200px) My(20px) Bds(s) Bdw(t) Bdc(lightgray) Lh(200px)">
-            <img class="W(100%)" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87"/>
+            {showImg &&
+          <img class="W(100%)" src={avatarUrl} alt="sample87"/>}
+            {!showImg &&
+          <img class="W(100%)" src={avatar} alt="sample87"/>}
+
           </div>
           <div class="My(20px)">
             <span class="Fw(b) Fz(18px)">{displayName}</span>
@@ -62,6 +71,9 @@ export default class ProfilePage extends React.Component {
              Bookmarks
           </Link>
           <div class="Lh(n)">
+            {tab === OVERVIEW && <div class="My(20px) Py(10px) Px(10px) shadow">
+              <ReactMarkdown source={this.state.overview}/>
+            </div>}
             {tab === THINGS && <ProfileThing things={things} isOwner={isOwner}/>}
             {tab === MAKES && <ProfileMake makes={makes} isOwner={isOwner}/>}
             {tab === BOOKMARKS && <ProfileBookmark bookmarks={bookmarks} isOwner={isOwner}/>}

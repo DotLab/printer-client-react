@@ -1,6 +1,7 @@
 import React from 'react';
 import {onChange} from '../utils';
 import avatar from './avatar.jpg';
+const ReactMarkdown = require('react-markdown');
 
 const INPUT_STYLE = 'H(30px) Bdrs($bdrs-control) D(b) W(100%) Fz(14px) P(12px) Bdw(t) Bgc(#fafbfc)';
 const MAX_SIZE = 1048576;
@@ -13,6 +14,8 @@ export default class SettingProfile extends React.Component {
     this.state = {
       displayName: '',
       bio: '',
+      overview: '',
+      preview: false,
     };
 
     this.onChange = onChange.bind(this);
@@ -46,13 +49,14 @@ export default class SettingProfile extends React.Component {
 
   async updateProfile(e) {
     e.preventDefault();
-    this.props.updateProfile({displayName: this.state.displayName, bio: this.state.bio});
+    this.props.updateProfile({displayName: this.state.displayName, bio: this.state.bio,
+      overview: this.state.overview});
     const userInfo = await this.props.userInfo();
     this.setState(userInfo);
   }
 
   render() {
-    const {displayName, bio} = this.state;
+    const {displayName, bio, overview, preview} = this.state;
     const {avatarUrl} = this.props;
     const hasAvatar = avatarUrl.length !== 0;
 
@@ -69,6 +73,21 @@ export default class SettingProfile extends React.Component {
             <textarea class="D(b) Bdrs(4px) W(100%) H(180px)  Fz(14px) P(12px) Bdw(t) Bgc(#fafbfc)" placeholder="Tell us a little bit about yourself..."
               name="bio" value={bio} onChange={this.onChange}/>
           </div>
+
+          <div class="Mt($m-control)">
+            <span class="Fz(14px) Fw(b)">Overview</span>
+            <div>
+              <span class={'Fz(14px) Cur(p) Mend(20px) ' + (preview ? '' : 'Fw(b)')} onClick={() => this.setState({preview: false})}>Edit</span>
+              <span class={'Fz(14px) Cur(p) ' + (preview ? 'Fw(b)' : '')} onClick={() => this.setState({preview: true})}>Preview changes</span>
+            </div>
+            {!preview && <textarea class="Bdw(2px) Bdc(lightgray) P(6px) D(b) Mt(10px) W(100%) H(180px)" placeholder="Add an overview..." name="overview"
+              onChange={this.onChange} value={overview}/>}
+            {preview &&
+              <div class="Bds(s) Bdw(2px) Bdc(lightgray) Px(10px) Py(10px) Mt(10px) W(100%)">
+                <ReactMarkdown source={overview}/>
+              </div>}
+          </div>
+
           <button class="C(white) D(b) Bgc(dimgray) Bgc(black):h Py(4px) Mt($m-control) Bdrs($bdrs-control) Bdc(t)" onClick={this.updateProfile}>Update profile</button>
         </form>
         <div class="W(30%) My(20px) Pos(r)">
