@@ -158,7 +158,7 @@ export default class RemixCreatePage extends React.Component {
         <div class="D(ib) W(48%) Bds(s) Ta(c) H(300px) Bdc(lightgray) Bdw(2px)">
           <div class="Py(80px)">
             <label>Upload zip file *</label>
-            <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" onChange={this.onFileChange}/>
+            <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" accept=".zip" onChange={this.onFileChange}/>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default class RemixCreatePage extends React.Component {
           <div class="Py(80px)">
             <label>Upload pictures *</label>
             <div class="Fz(12px) Pstart(40px) My(20px)">
-              <input key={this.state.inputPictureKey} multiple type="file" name="file" onChange={this.onPictureFileChange}/>
+              <input key={this.state.inputPictureKey} multiple type="file" name="file" accept="image/png, image/jpeg, .jpg" onChange={this.onPictureFileChange}/>
             </div>
           </div>
         </div>

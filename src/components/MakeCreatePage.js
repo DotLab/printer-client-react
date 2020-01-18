@@ -91,7 +91,7 @@ export default class MakeCreatePage extends React.Component {
         <div class="Bds(s) Ta(c) H(300px) Bdc(lightgray) Bdw(2px)">
           <div class="Py(80px)">
             <label>Upload make picture here *</label>
-            <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" onChange={this.onFileChange}/>
+            <div class="Fz(12px) Pstart(40px) My(20px)"><input key={this.state.inputKey} type="file" name="file" accept="image/png, image/jpeg, .jpg" onChange={this.onFileChange}/>
             </div>
           </div>
         </div>
