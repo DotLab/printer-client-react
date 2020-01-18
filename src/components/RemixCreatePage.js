@@ -66,7 +66,6 @@ export default class RemixCreatePage extends React.Component {
   async componentDidMount() {
     const source = await this.app.getThingNames({token: this.app.state.token, thingId: this.props.match.params.thingId});
     this.setState({sourceThingName: source.name, sourceThingUploaderId: source.uploaderId, sourceThingUploaderName: source.uploaderName});
-    console.log(this.state);
   }
 
   changeFilter(e) {
@@ -77,7 +76,6 @@ export default class RemixCreatePage extends React.Component {
 
   onFileChange(e) {
     if (!e.target.files[0]) return;
-    console.log('here');
     const name = e.target.files[0].name;
     const size = e.target.files[0].size;
 

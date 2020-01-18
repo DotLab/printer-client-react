@@ -74,7 +74,6 @@ export default class App extends React.Component {
   }
 
   saveUrl(currentUrl) {
-    console.log(currentUrl);
     this.setState({currentUrl});
   }
 
@@ -246,13 +245,11 @@ export default class App extends React.Component {
   async createRemix({sourceThingId, sourceThingName, sourceThingUploaderId, sourceThingUploaderName,
     pictureBuffer, fileName, fileSize, buffer, name, license, category, type, summary, printerBrand,
     raft, support, resolution, infill, filamentBrand, filamentColor, filamentMaterial, note, token}) {
-    console.log('here');
     const res = await this.genericApi1('/v1/remixes/upload', {sourceThingId, sourceThingName,
       pictureBuffer, sourceThingUploaderId, sourceThingUploaderName, fileName, fileSize, buffer, name,
       license, category, type, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, token});
     this.history.push(`/things/${res.payload}/details`);
-    console.log(res);
   }
 
   async userDetail({userName}) {
@@ -276,8 +273,7 @@ export default class App extends React.Component {
   }
 
   async updateProfile({displayName, bio, overview, token}) {
-    const res = await this.genericApi1('/v1/users/profile/update', {displayName, bio, overview, token});
-    console.log(res);
+    await this.genericApi1('/v1/users/profile/update', {displayName, bio, overview, token});
   }
 
   async userInfo({token}) {
@@ -303,13 +299,11 @@ export default class App extends React.Component {
 
   async uploadAvatar({token, buffer}) {
     const res = await this.genericApi1('/v1/users/avatar', {token, buffer});
-    console.log(res);
     return res.payload;
   }
 
   async getAvatarUrl({userName}) {
     const res = await this.genericApi1('/v1/users/get-avatar', {userName});
-    console.log(res);
     return res.payload;
   }
 

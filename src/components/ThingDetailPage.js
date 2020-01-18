@@ -70,7 +70,6 @@ export default class ThingDetailPage extends React.Component {
 
   async componentDidMount() {
     const thing = await this.app.thingDetail({thingId: this.props.match.params.thingId});
-    console.log(thing);
     this.setState(thing);
     let liked = false;
     let bookmarked = false;
@@ -117,7 +116,6 @@ export default class ThingDetailPage extends React.Component {
 
   async checkLogin() {
     if (!this.app.state.token) {
-      console.log(this.props.location.pathname);
       this.app.saveUrl(this.props.location.pathname);
       this.props.history.push('/login');
     }
@@ -160,7 +158,6 @@ export default class ThingDetailPage extends React.Component {
 
   async thingRemixList() {
     const remixes = await this.app.thingRemixList({thingId: this.props.match.params.thingId, limit: LIMIT});
-    console.log(remixes);
     this.setState({remixes});
   }
 

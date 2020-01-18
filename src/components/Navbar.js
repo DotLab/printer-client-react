@@ -27,8 +27,6 @@ export default class Navbar extends React.Component {
     if (this.app.state.user) {
       this.setState(this.app.state.user);
     }
-    // this.setState(userInfo);
-    console.log(this.state, this.app.state.user);
   }
 
   changePath(e) {
@@ -89,7 +87,6 @@ export default class Navbar extends React.Component {
     if (this.app.state.user) {
       avatarUrl = this.app.state.user.avatarUrl;
     }
-    // console.log(this.app.state.user);
 
     return <div>
       <div class="bg-dark H(64px) Pos(st) Mb(20px) D(f) Jc(sa) shadow" >

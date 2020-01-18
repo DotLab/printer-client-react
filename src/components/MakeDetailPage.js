@@ -48,7 +48,6 @@ export default class MakeDetailPage extends React.Component {
 
   async componentDidMount() {
     const make = await this.app.makeDetail({makeId: this.props.match.params.makeId});
-    console.log(make);
     this.setState(make);
     if (this.app.state.token) {
       const liked = await this.app.makeLikeStatus({makeId: this.state._id, token: this.app.state.token});

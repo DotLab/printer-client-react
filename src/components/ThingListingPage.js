@@ -66,8 +66,6 @@ export default class ThingListingPage extends React.Component {
       this.query.c = FILTER_ALL;
     }
 
-    console.log(this.query.order);
-
     const things = await this.app.thingList({
       category: this.query.c,
       type: this.query.type,

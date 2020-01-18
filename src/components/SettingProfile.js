@@ -25,13 +25,11 @@ export default class SettingProfile extends React.Component {
 
   async componentDidMount() {
     const userInfo = await this.props.userInfo();
-    console.log(userInfo);
     this.setState(userInfo);
   }
 
   async onFileChange(e) {
     if (!e.target.files[0]) return;
-    console.log(e.target.files[0].name);
     const size = e.target.files[0].size;
 
     if (size > MAX_SIZE) {

@@ -26,7 +26,6 @@ export default class ThingDetailInfo extends React.Component {
       fileName, fileSize, uploadDate, summary, printerBrand, raft, support, resolution, infill,
       filamentBrand, filamentColor, filamentMaterial, note, pictureUrls} = this.props;
     const {pictureId} = this.state;
-    console.log(pictureUrls);
 
     return <div>
       <div class="Py(30px) D(f) Jc(sa) My(10px) Bdrs(4px) Bds(s) Bdw(t) Bdc(lightgray)">

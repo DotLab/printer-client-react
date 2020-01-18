@@ -66,7 +66,6 @@ export default class ThingCreatePage extends React.Component {
 
   onFileChange(e) {
     if (!e.target.files[0]) return;
-    console.log('here');
     const name = e.target.files[0].name;
     const size = e.target.files[0].size;
 

@@ -44,7 +44,6 @@ export default class MakeCreatePage extends React.Component {
   async componentDidMount() {
     const source = await this.app.getThingNames({token: this.app.state.token, thingId: this.props.match.params.thingId});
     this.setState({sourceThingName: source.name, sourceThingUploaderId: source.uploaderId, sourceThingUploaderName: source.uploaderName});
-    console.log(this.state);
   }
 
   onFileChange(e) {
