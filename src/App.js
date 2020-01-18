@@ -50,7 +50,6 @@ export default class App extends React.Component {
         } else {
           reject(response.data);
           this.userLogOut();
-          this.userLogin({email: 'kai@gmail.com', password: '123'});
         }
       }).catch((err) => {
         reject(err);
