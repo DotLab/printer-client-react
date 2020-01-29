@@ -32,7 +32,7 @@ export default class Login extends React.Component {
     return <div>
       <div class="Mt(40px)">
         <div class="W(30%) Mx(a)">
-          <h2 class="Fz(20px) Ta(c) Pt(30px) C(black)">Sign in to SteelBlue</h2>
+          <h2 class="Fz(20px) Ta(c) Pt(30px) C(black)">Sign in to Scarletea Printer</h2>
 
           <form class="Maw(300px) Mx(a) Px(12px) Bdrs($bdrs-panel) My(30px)">
             <div>
@@ -48,7 +48,7 @@ export default class Login extends React.Component {
           </form>
 
           <div class="Fz(12px) Ta(c)">
-            New to Steelblue? <Link to="/register">Create an account.</Link>
+            New to Scarletea Printer? <Link to="/register">Create an account.</Link>
           </div>
         </div>
       </div>

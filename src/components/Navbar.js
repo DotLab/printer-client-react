@@ -87,8 +87,8 @@ export default class Navbar extends React.Component {
     return <div>
       <div class="bg-dark H(64px) Pos(st) Mb(20px) D(f) Jc(sa) shadow" >
         <div>
-          <h1 class="Fz(20px) Lh(64px) Cur(p) Fl(start) Mstart(20px)"><Link to="/" class="C(white) C(gray):h Td(n):h">Steelblue</Link></h1>
-          <span class="Fz(16px) Lh(64px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)"><Link to="/things" class="C(white) C(gray):h Td(n):h">Things</Link>
+          <h1 class="Fz(20px) Lh(64px) Cur(p) Fl(start) Mstart(20px)"><Link to="/" class="C(white) C(gray):h Td(n):h">Scarletea</Link></h1>
+          <span class="Fz(16px) Lh(64px) Cur(p) C(white) Mstart(20px) Pos(r) D(ib)"><Link to="/things" class="C(white) C(gray):h Td(n):h">Printer</Link>
           </span>
         </div>
 
